@@ -7,12 +7,11 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Enemy Start");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
