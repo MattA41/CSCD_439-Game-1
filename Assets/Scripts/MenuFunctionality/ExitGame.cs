@@ -14,11 +14,12 @@ public class ExitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        void QuitGame()
-        {
+     
+    }   
+    void QuitGame()
+    {
             Application.Quit();
             Debug.Log("Exiting Game");
-            //Just to make sure its working
-        }
+            //Just to make sure its working?
     }
 }
