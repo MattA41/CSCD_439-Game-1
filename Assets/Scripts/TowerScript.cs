@@ -13,6 +13,9 @@ public class TowerScript : MonoBehaviour
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private LineRenderer lineRenderer;
+    
+    public GameObject bulletPrefab;
+    public Transform firePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -57,12 +60,10 @@ public class TowerScript : MonoBehaviour
     {
         if (enemy != null)
         {
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, enemy.transform.position);
-            lineRenderer.enabled = true;
-
-            EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
-            enemyScript.TakeDamage(damage);
+          GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+          Bullet bulletScript = bullet.GetComponent<Bullet>();
+          bulletScript.SetTarget(enemy.transform);
+          bulletScript.damage = damage;
 
         }
     }
