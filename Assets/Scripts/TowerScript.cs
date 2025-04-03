@@ -7,6 +7,10 @@ using UnityEngine.Timeline;
 public class TowerScript : MonoBehaviour
 {
 
+    public int damage = 10;
+    public float attackCooldown = 1f;
+    private float lastAttackTime = 0f;
+
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private LineRenderer lineRenderer;
 
@@ -23,9 +27,10 @@ public class TowerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemiesInRange.Count > 0)
+        if (enemiesInRange.Count > 0 && Time.time >= lastAttackTime + attackCooldown)
         {
             Attack(enemiesInRange[0]);
+            lastAttackTime = Time.time;
         }
     }
 
@@ -55,6 +60,10 @@ public class TowerScript : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, enemy.transform.position);
             lineRenderer.enabled = true;
+
+            EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+            enemyScript.TakeDamage(damage);
+
         }
     }
 }
