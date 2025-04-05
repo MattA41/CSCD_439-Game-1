@@ -366,7 +366,7 @@ MonoBehaviour:
   maxPage: 3
   pageStep: {x: -800, y: 0, z: 0}
   levelPagesRect: {fileID: 357185048}
-  tweenTime: 0.6
+  tweenTime: 1
   tweenType: 6
 --- !u!1 &229395546
 GameObject:
