@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class SwipeController : MonoBehaviour
 {
     [SerializeField] int maxPage;
-    int currentpage;
+    public int currentpage;
     Vector3 targetPos;
     [SerializeField] Vector3 pageStep;
     [SerializeField] RectTransform levelPagesRect;
@@ -14,7 +16,7 @@ public class SwipeController : MonoBehaviour
 
     private void Awake()
     {
-        currentpage = 1;
+        currentpage = 0;
         targetPos = levelPagesRect.localPosition;
     }
 
@@ -31,7 +33,7 @@ public class SwipeController : MonoBehaviour
 
     public void Previous()
     {
-        if (currentpage > 1)
+        if (currentpage > 0)
         {
             currentpage--;
             targetPos-=pageStep;
@@ -43,5 +45,24 @@ public class SwipeController : MonoBehaviour
     void MovePage()
     {
         levelPagesRect.LeanMoveLocal(targetPos,tweenTime).setEase(tweenType);
+    }
+  
+
+    public void SelectPage()
+    {
+        int[] maps = new int[] { 0, 1 }; // Add as many maps as needed
+
+        if (maps[currentpage] == 0)
+        {
+            SceneManager.LoadScene("Scenes/Map1");
+        }
+        if (maps[currentpage] == 1)
+        {
+            SceneManager.LoadScene("Scenes/Map2");
+        }
+        else
+        {
+            Debug.Log("Not a valid map");
+        }
     }
 }
