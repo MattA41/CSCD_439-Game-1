@@ -48,6 +48,8 @@ public class SwipeController : MonoBehaviour
     }
   
 
+    //Add maps to the Window Scroller
+
     public void SelectPage()
     {
         int[] maps = new int[] { 0, 1 }; // Add as many maps as needed
