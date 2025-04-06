@@ -7,11 +7,12 @@ public class EnemyScript : MonoBehaviour
     public GameObject[] waypoints;
     int currentWP = 0;
     public float speed = 10.0f;
-    GameManager manager;
+    public GameManager manager;
+    private GameManager script;
     // Start is called before the first frame update
     void Start()
     {
-        manager = GetComponent<GameManager>();
+        script = manager.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -26,8 +27,8 @@ public class EnemyScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Goal"){
-            //manager.health = --manager.health;
-            Debug.Log("goal reached " + manager.health);
+            manager.health = --manager.health;
+            Debug.Log("goal reached " + script.GetComponent("health"));
             Destroy(this.gameObject);
         }
     }
