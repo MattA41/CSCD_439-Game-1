@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
         // Optionally: destroy if close enough
         if (Vector2.Distance(transform.position, target.position) < 0.05f)
         {
-            if (target.TryGetComponent<EnemyScript>(out EnemyScript enemy))
+            if (target.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.TakeDamage(damage);
             }
