@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float speed = 10.0f;
+    public PlayerManager manager; 
+    public int health = 100;
     public GameObject[] waypoints;
     int currentWP = 0;
-    public float speed = 10.0f;
-    public GameManager manager;
-    private GameManager script;
-    
-    public int health = 100;
+
     // Start is called before the first frame update
     void Start()
     {

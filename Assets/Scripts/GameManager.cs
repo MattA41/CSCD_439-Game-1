@@ -5,9 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerManager manager;
-    public EnemyScript enemy;
-
-
     bool isGameOver;
 
     // Start is called before the first frame update
