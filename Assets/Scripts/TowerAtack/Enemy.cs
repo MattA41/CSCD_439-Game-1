@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        script = manager.GetComponent<GameManager>();
+        
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Goal"){
             manager.health = --manager.health;
-            Debug.Log("goal reached " + script.GetComponent("health"));
+            Debug.Log("goal reached " + manager.health);
             Destroy(this.gameObject);
         }
     }

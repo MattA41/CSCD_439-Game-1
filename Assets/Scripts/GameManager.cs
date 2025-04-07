@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int health = 100;
+    public PlayerManager manager;
+    public EnemyScript enemy;
+
+
     bool isGameOver;
 
     // Start is called before the first frame update
@@ -16,8 +19,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isGameOver && health <= 0){
-            isGameOver = true;
+        if(manager.isDead){
+           isGameOver = true;
+           Debug.Log("game is over");
         }
     }
 
