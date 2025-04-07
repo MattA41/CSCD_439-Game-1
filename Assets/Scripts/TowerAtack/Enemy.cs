@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public GameObject[] waypoints;
     int currentWP = 0;
     public float speed = 10.0f;
     public GameManager manager;
     private GameManager script;
+    
+    public int health = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,17 @@ public class EnemyScript : MonoBehaviour
         
         Vector3 newPos = Vector3.MoveTowards(this.transform.position, waypoints[currentWP].transform.position, speed * Time.deltaTime);
         this.transform.position = newPos;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log(health);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other){
