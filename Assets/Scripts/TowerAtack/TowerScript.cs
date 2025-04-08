@@ -12,19 +12,12 @@ public class TowerScript : MonoBehaviour
     private float lastAttackTime = 0f;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
-    private LineRenderer lineRenderer;
     
     public GameObject bulletPrefab;
-    public Transform firePoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 2;
-        lineRenderer.enabled = true;
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
     }
 
     // Update is called once per frame
@@ -32,6 +25,7 @@ public class TowerScript : MonoBehaviour
     {
         if (enemiesInRange.Count > 0 && Time.time >= lastAttackTime + attackCooldown)
         {
+            Debug.Log(enemiesInRange.Count);
             Attack(enemiesInRange[0]);
             lastAttackTime = Time.time;
         }

@@ -99,6 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5c94341c187fd488555cf305bab665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  attackCooldown: 1
+  bulletPrefab: {fileID: 4709083612906800395, guid: 5259d3098d577734e9354d2855e49384, type: 3}
+  firePoint: {fileID: 0}
 --- !u!58 &2912400287819524423
 CircleCollider2D:
   m_ObjectHideFlags: 0
