@@ -81,3 +81,5 @@ Packages/packages-lock.json
 .vscode/settings.json
 
 .idea/.idea.CSCD_439-Game-1/.idea/
+
+.DS_Store
