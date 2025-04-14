@@ -50,6 +50,13 @@ public class TowerPlacementManager : MonoBehaviour
         previewTower = Instantiate(towerPrefab);
         previewTower.GetComponent<Collider2D>().enabled = false;
         previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f); // semi-transparent
+
+        // Enable range indicator 
+        var rangeIndicator = previewTower.transform.Find("RangeIndicator");
+        if (rangeIndicator != null)
+        {
+            rangeIndicator.gameObject.SetActive(true);
+        }
     }
 
     private void PlaceTower()
@@ -59,6 +66,12 @@ public class TowerPlacementManager : MonoBehaviour
         // Finalize tower
         previewTower.GetComponent<SpriteRenderer>().color = Color.white;
         previewTower.GetComponent<Collider2D>().enabled = true;
+
+        var rangeIndicator = previewTower.transform.Find("RangeIndicator");
+        if (rangeIndicator != null)
+        {
+            rangeIndicator.gameObject.SetActive(false);
+        }
 
         previewTower = null;
     }
