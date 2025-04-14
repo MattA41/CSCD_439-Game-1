@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 2912400287819524416, guid: 27108af4f3d8c0c45977e2dd408a8329, type: 3}
+  playerManager: {fileID: 262839151}
 --- !u!61 &121239472
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4001,6 +4002,7 @@ GameObject:
   - component: {fileID: 1696256688}
   - component: {fileID: 1696256690}
   - component: {fileID: 1696256689}
+  - component: {fileID: 1696256691}
   m_Layer: 5
   m_Name: MoneyNum
   m_TagString: Untagged
@@ -4070,6 +4072,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696256687}
   m_CullTransparentMesh: 1
+--- !u!114 &1696256691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696256687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97de6a9f557678a42886428b534d24ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 1696256689}
+  playerManager: {fileID: 262839151}
 --- !u!1 &1804484298
 GameObject:
   m_ObjectHideFlags: 0
