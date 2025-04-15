@@ -34,7 +34,15 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            manager.coins = manager.coins + 5;
+            CollectMoney(3);
+        }
+    }
+
+    void CollectMoney(int amount)    //Adds Money when enemy is destroyed. You can change the param to any val.
+    {
+        if (health <= 0)
+        {
+            manager.coins = manager.coins + amount;
         }
     }
 
