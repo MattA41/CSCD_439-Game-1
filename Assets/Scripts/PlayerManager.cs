@@ -16,7 +16,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && health < 0){
+        if (!isDead && health <= 0){
+
+            health = 0;
             isDead = true;
         }
     }
