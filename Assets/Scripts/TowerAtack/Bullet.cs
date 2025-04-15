@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         
         // Optionally: destroy if close enough
-        if (Vector2.Distance(transform.position, target.position) < 0.05f)
+        if (Vector2.Distance(transform.position, target.position) < .5f)
         {
             if (target.TryGetComponent<Enemy>(out Enemy enemy))
             {

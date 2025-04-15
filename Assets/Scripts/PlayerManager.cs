@@ -20,4 +20,11 @@ public class PlayerManager : MonoBehaviour
             isDead = true;
         }
     }
+
+
+    public void PlaceBasicTower()
+    {
+        Debug.Log("Tower Placed!");
+        coins = coins - 30;
+    }
 }

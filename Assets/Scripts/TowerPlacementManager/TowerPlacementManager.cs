@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerPlacementManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class TowerPlacementManager : MonoBehaviour
 
     private bool isDragging = false;
     
+    public PlayerManager playerManager;
+
     // Update is called once per frame
     void Update()
     {
@@ -61,5 +64,10 @@ public class TowerPlacementManager : MonoBehaviour
         previewTower.GetComponent<Collider2D>().enabled = true;
 
         previewTower = null;
+
+        playerManager.coins = playerManager.coins - 50; 
+
+        
+        
     }
 }
