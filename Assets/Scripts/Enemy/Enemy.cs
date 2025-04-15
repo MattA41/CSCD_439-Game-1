@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            CollectMoney(3);
+            CollectMoney(25);
         }
     }
 
