@@ -13,6 +13,8 @@ public class TowerPlacementManager : MonoBehaviour
     
     public PlayerManager playerManager;
 
+    public int cost = 50;
+
     // Update is called once per frame
     void Update()
     {
@@ -42,20 +44,29 @@ public class TowerPlacementManager : MonoBehaviour
             // Place when mouse is released
             if (Input.GetMouseButtonUp(0))
             {
-                PlaceTower();
+                PlaceTower(cost);
             }
         }
     }
 
     private void StartDragTower()
     {
-        isDragging = true;
-        previewTower = Instantiate(towerPrefab);
-        previewTower.GetComponent<Collider2D>().enabled = false;
-        previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f); // semi-transparent
+        if (cost <= playerManager.coins)
+        {
+            isDragging = true;
+            previewTower = Instantiate(towerPrefab);
+            previewTower.GetComponent<Collider2D>().enabled = false;
+            previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f); // semi-transparent
+
+        }
+        else
+        {
+            Debug.Log("NOT ENOUGH MONEY!");
+        }
+       
     }
 
-    private void PlaceTower()
+    private void PlaceTower(int cost)
     {
         isDragging = false;
         
@@ -65,7 +76,7 @@ public class TowerPlacementManager : MonoBehaviour
 
         previewTower = null;
 
-        playerManager.coins = playerManager.coins - 50; 
+        playerManager.coins = playerManager.coins - cost; 
 
         
         
