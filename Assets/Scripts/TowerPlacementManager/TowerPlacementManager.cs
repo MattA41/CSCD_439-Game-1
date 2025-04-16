@@ -69,19 +69,6 @@ public class TowerPlacementManager : MonoBehaviour
         rangeVisual = previewTower.transform.Find("RangeVisual");
         rangeRenderer = rangeVisual.GetComponent<SpriteRenderer>();
         rangeVisual.gameObject.SetActive(true);
-
-        SyncRangeVisualToCollider();
-    }
-
-    private void SyncRangeVisualToCollider()
-    {
-        // float radius = previewTower.GetComponent<CircleCollider2D>().radius;
-        // float spriteRadius = 0.5f;
-        // float scale = radius / spriteRadius;
-        // transform.Find("RangeVisual").localScale = Vector3.one * scale;
-
-        // Debug.Log($"Collider Radius: {radius}, Visual Scale: {scale}");
-
     }
 
     private bool IsValidPlacement(Vector3Int gridPos)
