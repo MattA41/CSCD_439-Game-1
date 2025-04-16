@@ -2,12 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TowerPlacementManager : MonoBehaviour
 {
     public GameObject towerPrefab;
 
+
+    [Header("Tilemap Settings")]
+    public Tilemap roadTilemap; // Assign red path tilemap here
+
     private GameObject previewTower;
+    private SpriteRenderer rangeRenderer;
+    private Transform rangeVisual;
 
 
     private bool isDragging = false;
@@ -16,6 +23,7 @@ public class TowerPlacementManager : MonoBehaviour
     void Update()
     {
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int gridPos = roadTilemap.WorldToCell(mouseWorldPos); // still used for tile check
 
         if (!isDragging)
         {
@@ -36,12 +44,18 @@ public class TowerPlacementManager : MonoBehaviour
             if (previewTower != null)
             {
                 previewTower.transform.position = mouseWorldPos;
-            }
 
-            // Place when mouse is released
-            if (Input.GetMouseButtonUp(0))
-            {
-                PlaceTower();
+                bool isValid = IsValidPlacement(gridPos);
+                rangeRenderer.color = isValid
+                    ? new Color(0f, 1f, 0f, 0.3f) // green
+                    : new Color(1f, 0f, 0f, 0.3f); // red
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (isValid) PlaceTower();
+                    else CancelPlacement();
+                }
+
             }
         }
     }
@@ -50,56 +64,40 @@ public class TowerPlacementManager : MonoBehaviour
     {
         isDragging = true;
         previewTower = Instantiate(towerPrefab);
-
-        // Make preview transparent
         previewTower.GetComponent<Collider2D>().enabled = false;
-        // previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f); // semi-transparent
 
-        // Sync the radius visual to the collider radius
-        // SyncRangeVisualToCollider(previewTower);
+        rangeVisual = previewTower.transform.Find("RangeVisual");
+        rangeRenderer = rangeVisual.GetComponent<SpriteRenderer>();
+        rangeVisual.gameObject.SetActive(true);
 
-        Transform rangeVisual = previewTower.transform.Find("RangeVisual");
-        if (rangeVisual != null)
-        {
-            rangeVisual.gameObject.SetActive(true); // Show the range visual
-        }
+        SyncRangeVisualToCollider();
     }
 
-    private void SyncRangeVisualToCollider(GameObject tower)
+    private void SyncRangeVisualToCollider()
     {
-        float radius = tower.GetComponent<CircleCollider2D>().radius;
-        Transform rangeVisual = tower.transform.Find("RangeVisual");
+        float radius = previewTower.GetComponent<CircleCollider2D>().radius;
+        float spriteRadius = 0.5f;
+        float scale = radius / spriteRadius;
+        rangeVisual.localScale = Vector3.one * scale;
+    }
 
-        if (rangeVisual != null)
-        {
-            float spriteRadius = rangeVisual.GetComponent<SpriteRenderer>().bounds.extents.x; // Assuming the range visual is a circle sprite
-
-            if (spriteRadius > 0f)
-            {
-                float scaleFactor = radius / spriteRadius;
-                rangeVisual.localScale = Vector3.one * scaleFactor; // Scale the range visual to match the collider radius
-            }
-            else
-            {
-                Debug.LogWarning("Sprite bounds not valid — check if sprite is assigned!");
-            }
-        }
+    private bool IsValidPlacement(Vector3Int gridPos)
+    {
+        return roadTilemap.GetTile(gridPos) == null;
     }
 
     private void PlaceTower()
     {
         isDragging = false;
-
-        // Finalize tower
-        previewTower.GetComponent<SpriteRenderer>().color = Color.white;
         previewTower.GetComponent<Collider2D>().enabled = true;
+        rangeVisual.gameObject.SetActive(false);
+        previewTower = null;
+    }
 
-        var rangeVisual = previewTower.transform.Find("RangeVisual");
-        if (rangeVisual != null)
-        {
-            rangeVisual.gameObject.SetActive(false); // Hide the range visual
-        }
-
+    private void CancelPlacement()
+    {
+        isDragging = false;
+        Destroy(previewTower);
         previewTower = null;
     }
 }
