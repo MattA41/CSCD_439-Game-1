@@ -43,6 +43,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 709215561
+    locked: 0
+  - name: Road
+    uniqueID: 3646265629
+    locked: 0
+  - name: Details
+    uniqueID: 200644481
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
