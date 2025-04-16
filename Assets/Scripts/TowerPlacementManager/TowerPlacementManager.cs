@@ -1,19 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class TowerPlacementManager : MonoBehaviour
 {
     public GameObject towerPrefab;
 
+
+    [Header("Tilemap Settings")]
+    public Tilemap roadTilemap; // Assign red path tilemap here
+
     private GameObject previewTower;
+    private SpriteRenderer rangeRenderer;
+    private Transform rangeVisual;
+
 
     private bool isDragging = false;
-    
+
     // Update is called once per frame
     void Update()
     {
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int gridPos = roadTilemap.WorldToCell(mouseWorldPos); // still used for tile check
 
         if (!isDragging)
         {
@@ -34,12 +44,18 @@ public class TowerPlacementManager : MonoBehaviour
             if (previewTower != null)
             {
                 previewTower.transform.position = mouseWorldPos;
-            }
 
-            // Place when mouse is released
-            if (Input.GetMouseButtonUp(0))
-            {
-                PlaceTower();
+                bool isValid = IsValidPlacement(gridPos);
+                rangeRenderer.color = isValid
+                    ? new Color(0f, 1f, 0f, 0.3f) // green
+                    : new Color(1f, 0f, 0f, 0.3f); // red
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    if (isValid) PlaceTower();
+                    else CancelPlacement();
+                }
+
             }
         }
     }
@@ -49,17 +65,29 @@ public class TowerPlacementManager : MonoBehaviour
         isDragging = true;
         previewTower = Instantiate(towerPrefab);
         previewTower.GetComponent<Collider2D>().enabled = false;
-        previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f); // semi-transparent
+
+        rangeVisual = previewTower.transform.Find("RangeVisual");
+        rangeRenderer = rangeVisual.GetComponent<SpriteRenderer>();
+        rangeVisual.gameObject.SetActive(true);
+    }
+
+    private bool IsValidPlacement(Vector3Int gridPos)
+    {
+        return roadTilemap.GetTile(gridPos) == null;
     }
 
     private void PlaceTower()
     {
         isDragging = false;
-        
-        // Finalize tower
-        previewTower.GetComponent<SpriteRenderer>().color = Color.white;
         previewTower.GetComponent<Collider2D>().enabled = true;
+        rangeVisual.gameObject.SetActive(false);
+        previewTower = null;
+    }
 
+    private void CancelPlacement()
+    {
+        isDragging = false;
+        Destroy(previewTower);
         previewTower = null;
     }
 }
