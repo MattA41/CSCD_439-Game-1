@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
+[ExecuteAlways]
 public class TowerScript : MonoBehaviour
 {
 
@@ -19,14 +20,17 @@ public class TowerScript : MonoBehaviour
 
     private void Awake()
     {
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
         // Sync collider to attack range
-        GetComponent<CircleCollider2D>().radius = attackRange;
+        collider.radius = attackRange;
 
         // Sync range visual scale
         Transform rangeVisual = transform.Find("RangeVisual");
         if (rangeVisual != null)
         {
-            rangeVisual.localScale = new Vector3(attackRange * 2f, attackRange * 2f, 1f);
+            float spriteRadius = 0.5f; // assuming the circle sprite is 1 unit wide
+            float scaleFactor = attackRange / spriteRadius;
+            rangeVisual.localScale = Vector3.one * scaleFactor;
         }
     }
 
