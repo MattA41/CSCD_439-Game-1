@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,15 @@ public class GameManager : MonoBehaviour
         if(manager.isDead){
            isGameOver = true;
            Debug.Log("game is over");
+           EndScreen();
+        }
+    }
+
+   void EndScreen()
+    {
+        if (isGameOver)
+        {
+            SceneManager.LoadScene("Scenes/Menu/SelectScreen");
         }
     }
 

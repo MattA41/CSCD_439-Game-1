@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            CollectMoney(3);
+            CollectMoney(25);
         }
     }
 
@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if(other.tag == "Goal"){
+        if(other.tag == "Goal" && manager.health != 0){
             manager.health = --manager.health;
             Debug.Log("goal reached " + manager.health);
             Destroy(this.gameObject);
