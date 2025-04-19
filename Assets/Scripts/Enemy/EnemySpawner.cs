@@ -6,14 +6,14 @@ using System.Threading;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; //prfab for spawning enemys
+    public GameObject[] enemyPrefabs; //prfab for spawning enemys
     public float spawnDelay = 3.0f; //delay inbetween enemy spawns
     private float nextSpawnTime; //time when next enemy will spawn
     //enemy vars
     public GameObject[] mapWayPoints; //waypoints for enemy navigation
     public PlayerManager pmanager; //player manager for enemy to affect health
-    public int enemyHealth = 100; //holds the health value for enemys
-    public int enemySpeed = 5; //hold the speed value for enemys
+    public int enemyHealthAdd = 1; //holds the health value for enemys
+    public float enemySpeedAdd = 0.5f; //hold the speed value for enemys
     //wave management
     public bool IsWaves; // If the level will have waves set to true
     public int waveNums = 10; //number of waves for the level
@@ -82,12 +82,16 @@ public class EnemySpawner : MonoBehaviour
     //spawns enemy and hands in values
     void SpawnEnemy()
     {
-        GameObject enemy = (GameObject)Instantiate(enemyPrefab, gameObject.transform);
+        var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+        GameObject enemy = (GameObject)Instantiate(enemyPrefabs[randomIndex], gameObject.transform);
         var enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
-        enemyScript.health = enemyHealth;
-        enemyScript.speed = enemySpeed;
+        if(currWave > 1){
+            enemyScript.health += enemyHealthAdd;
+            enemyScript.speed += enemySpeedAdd;
+        }
+        
     }
 
     
