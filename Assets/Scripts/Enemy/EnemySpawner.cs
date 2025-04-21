@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,13 +25,24 @@ public class EnemySpawner : MonoBehaviour
     private bool isSpawningWaves = false;
     private bool isPausedBetweenWaves = false;
 
-    public GameObject roundToggleButton; // Drag your UI button here in Inspector
+    public Button roundButton;      // The single UI button
+    public Sprite playIcon;         // ▶️ sprite
+    public Sprite pauseIcon;        // ⏸️ sprite
+
+    public enum GamePhase
+    {
+        BetweenWaves,
+        Running,
+        Paused
+    }
+
+    private GamePhase currentPhase = GamePhase.BetweenWaves;
 
     void Start()
     {
         currEnemyCount = enemyStartNum;
-        if (roundToggleButton != null)
-            roundToggleButton.SetActive(false);
+        Time.timeScale = 1f;
+        SetRoundButtonIcon(playIcon);  // Start with play icon
     }
 
     void Update()
@@ -57,12 +68,13 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawningWaves = true;
 
-        // Pause before first wave
         isPausedBetweenWaves = true;
-        roundToggleButton.SetActive(true);
-        Debug.Log("Waiting to start first wave...");
+        currentPhase = GamePhase.BetweenWaves;
+        SetRoundButtonIcon(playIcon);
         yield return new WaitUntil(() => isPausedBetweenWaves == false);
-        roundToggleButton.SetActive(false);
+
+        SetRoundButtonIcon(pauseIcon);
+        currentPhase = GamePhase.Running;
 
         for (int i = 0; i < waveNums; i++)
         {
@@ -81,21 +93,57 @@ public class EnemySpawner : MonoBehaviour
             if (i < waveNums - 1)
             {
                 isPausedBetweenWaves = true;
-                roundToggleButton.SetActive(true);
-                Debug.Log("Waiting for player to start next wave...");
+                currentPhase = GamePhase.BetweenWaves;
+                SetRoundButtonIcon(playIcon);
                 yield return new WaitUntil(() => isPausedBetweenWaves == false);
-                roundToggleButton.SetActive(false);
+
+                SetRoundButtonIcon(pauseIcon);
+                currentPhase = GamePhase.Running;
             }
         }
 
         Debug.Log("All waves complete");
         isSpawningWaves = false;
+        currentPhase = GamePhase.Running;
     }
 
-    public void ContinueToNextWave()
+    public void OnRoundButtonClick()
     {
-        Debug.Log("Continue button clicked!");
-        isPausedBetweenWaves = false;
+        switch (currentPhase)
+        {
+            case GamePhase.BetweenWaves:
+                isPausedBetweenWaves = false;
+                currentPhase = GamePhase.Running;
+                Time.timeScale = 1f;
+                SetRoundButtonIcon(pauseIcon);
+                break;
+
+            case GamePhase.Running:
+                Time.timeScale = 0f;
+                currentPhase = GamePhase.Paused;
+                SetRoundButtonIcon(playIcon);
+                break;
+
+            case GamePhase.Paused:
+                Time.timeScale = 1f;
+                currentPhase = GamePhase.Running;
+                SetRoundButtonIcon(pauseIcon);
+                break;
+        }
+
+        Debug.Log("Round button clicked. New state: " + currentPhase);
+    }
+
+    void SetRoundButtonIcon(Sprite icon)
+    {
+        if (roundButton != null && icon != null)
+        {
+            Image img = roundButton.GetComponent<Image>();
+            if (img != null)
+            {
+                img.sprite = icon;
+            }
+        }
     }
 
     void SpawnEnemy()
