@@ -7664,6 +7664,10 @@ PrefabInstance:
       propertyPath: roadTilemap
       value: 
       objectReference: {fileID: 19578811}
+    - target: {fileID: 4577344643457165652, guid: c98020e9d0f45435baf3ec8623cdbd9f, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 2122034014}
     - target: {fileID: 4577344643457165653, guid: c98020e9d0f45435baf3ec8623cdbd9f, type: 3}
       propertyPath: m_Name
       value: TowerSelector
