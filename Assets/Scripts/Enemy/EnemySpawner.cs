@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -150,8 +150,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
-        GameObject enemy = (GameObject)Instantiate(enemyPrefabs[randomIndex], gameObject.transform);
+        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         var enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
