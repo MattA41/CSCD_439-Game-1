@@ -1,47 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Threading;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; //prfab for spawning enemys
-    public float spawnDelay = 3.0f; //delay inbetween enemy spawns
-    private float nextSpawnTime; //time when next enemy will spawn
-    //enemy vars
-    public GameObject[] mapWayPoints; //waypoints for enemy navigation
-    public PlayerManager pmanager; //player manager for enemy to affect health
-    public int enemyHealth = 100; //holds the health value for enemys
-    public int enemySpeed = 5; //hold the speed value for enemys
-    //wave management
-    public bool IsWaves; // If the level will have waves set to true
-    public int waveNums = 10; //number of waves for the level
-    public int enemyStartNum = 10; //number of enemys at start
-    public int currWave; //the current waves
-    public int waveDelay = 30; //delay inbetween waves in seconds default is 30 seconds
-    public int enemyAdd = 3; //number of enemys to add at end of wave
-    private int currEnemyCount ; //used to add enemys
-    private bool isSpawningWaves = false;
+    public GameObject enemyPrefab;
+    public float spawnDelay = 3.0f;
+    private float nextSpawnTime;
 
-    //Start is called before the first frame update
+    public GameObject[] mapWayPoints;
+    public PlayerManager pmanager;
+    public int enemyHealth = 100;
+    public int enemySpeed = 5;
+
+    public bool IsWaves;
+    public int waveNums = 10;
+    public int enemyStartNum = 10;
+    public int waveDelay = 30;
+    public int enemyAdd = 3;
+
+    private int currEnemyCount;
+    private int currWave;
+    private bool isSpawningWaves = false;
+    private bool isPausedBetweenWaves = false;
+
+    public GameObject roundToggleButton; // Drag your UI button here in Inspector
+
     void Start()
     {
         currEnemyCount = enemyStartNum;
-        
+        if (roundToggleButton != null)
+            roundToggleButton.SetActive(false);
     }
 
-    //Update is called once per frame
     void Update()
     {
         if (IsWaves)
         {
-            if(!isSpawningWaves)
+            if (!isSpawningWaves)
             {
                 StartCoroutine(WaveSpawner());
             }
-            
-        }else
+        }
+        else
         {
             if (Time.time > nextSpawnTime)
             {
@@ -49,19 +51,24 @@ public class EnemySpawner : MonoBehaviour
                 nextSpawnTime = Time.time + spawnDelay;
             }
         }
-
-        
     }
-    IEnumerator WaveSpawner() //spawn waves with a wait time without freezing the whole game
+
+    IEnumerator WaveSpawner()
     {
         isSpawningWaves = true;
+
+        // Pause before first wave
+        isPausedBetweenWaves = true;
+        roundToggleButton.SetActive(true);
+        Debug.Log("Waiting to start first wave...");
+        yield return new WaitUntil(() => isPausedBetweenWaves == false);
+        roundToggleButton.SetActive(false);
 
         for (int i = 0; i < waveNums; i++)
         {
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
-            // Spawn all enemies in the wave
             for (int j = 0; j < currEnemyCount; j++)
             {
                 SpawnEnemy();
@@ -70,25 +77,34 @@ public class EnemySpawner : MonoBehaviour
 
             Debug.Log("Wave " + currWave + " ended");
             currEnemyCount += enemyAdd;
-            Debug.Log("Current enemy count: " + currEnemyCount);
 
-            // Wait before the next wave starts
-            yield return new WaitForSeconds(waveDelay);
+            if (i < waveNums - 1)
+            {
+                isPausedBetweenWaves = true;
+                roundToggleButton.SetActive(true);
+                Debug.Log("Waiting for player to start next wave...");
+                yield return new WaitUntil(() => isPausedBetweenWaves == false);
+                roundToggleButton.SetActive(false);
+            }
         }
 
         Debug.Log("All waves complete");
         isSpawningWaves = false;
     }
-    //spawns enemy and hands in values
+
+    public void ContinueToNextWave()
+    {
+        Debug.Log("Continue button clicked!");
+        isPausedBetweenWaves = false;
+    }
+
     void SpawnEnemy()
     {
-        GameObject enemy = (GameObject)Instantiate(enemyPrefab, gameObject.transform);
+        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         var enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
         enemyScript.health = enemyHealth;
         enemyScript.speed = enemySpeed;
     }
-
-    
 }
