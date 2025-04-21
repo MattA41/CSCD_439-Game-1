@@ -20,7 +20,7 @@ public class TowerPlacementManager : MonoBehaviour
 
     private bool isDragging = false;
 
-    
+
     public PlayerManager playerManager;
 
     public int cost = 50;
@@ -51,23 +51,28 @@ public class TowerPlacementManager : MonoBehaviour
             {
                 previewTower.transform.position = mouseWorldPos;
 
-            // Place when mouse is released
-            if (Input.GetMouseButtonUp(0))
-            {
-                PlaceTower(cost);
                 bool isValid = IsValidPlacement(gridPos);
                 rangeRenderer.color = isValid
                     ? new Color(0f, 1f, 0f, 0.3f) // green
                     : new Color(1f, 0f, 0f, 0.3f); // red
 
+                // Place when mouse is released
                 if (Input.GetMouseButtonUp(0))
                 {
-                    if (isValid) PlaceTower();
-                    else CancelPlacement();
-                }
+                    if (isValid && playerManager.coins >= cost)
+                    {
+                        PlaceTower();
+                        playerManager.coins -= cost;
+                    }
+                    else
+                    {
+                        CancelPlacement();
+                    }
 
+                }
             }
         }
+
     }
 
     private void StartDragTower()
@@ -77,21 +82,19 @@ public class TowerPlacementManager : MonoBehaviour
             isDragging = true;
             previewTower = Instantiate(towerPrefab);
             previewTower.GetComponent<Collider2D>().enabled = false;
-            previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f); // semi-transparent
+            previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f); // semi-transparent
+
+            rangeVisual = previewTower.transform.Find("RangeVisual");
+            rangeRenderer = rangeVisual.GetComponent<SpriteRenderer>();
+            rangeVisual.gameObject.SetActive(true);
 
         }
         else
         {
             Debug.Log("NOT ENOUGH MONEY!");
         }
-       
-        isDragging = true;
-        previewTower = Instantiate(towerPrefab);
-        previewTower.GetComponent<Collider2D>().enabled = false;
 
-        rangeVisual = previewTower.transform.Find("RangeVisual");
-        rangeRenderer = rangeVisual.GetComponent<SpriteRenderer>();
-        rangeVisual.gameObject.SetActive(true);
+
     }
 
     private bool IsValidPlacement(Vector3Int gridPos)
@@ -99,10 +102,11 @@ public class TowerPlacementManager : MonoBehaviour
         return roadTilemap.GetTile(gridPos) == null;
     }
 
-    private void PlaceTower(int cost)
+    private void PlaceTower()
     {
         isDragging = false;
         previewTower.GetComponent<Collider2D>().enabled = true;
+        previewTower.GetComponent<SpriteRenderer>().color = Color.white;
         rangeVisual.gameObject.SetActive(false);
         previewTower = null;
     }
@@ -113,9 +117,9 @@ public class TowerPlacementManager : MonoBehaviour
         Destroy(previewTower);
         previewTower = null;
 
-        playerManager.coins = playerManager.coins - cost; 
+        playerManager.coins = playerManager.coins - cost;
 
-        
-        
+
+
     }
 }
