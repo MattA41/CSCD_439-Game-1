@@ -6151,6 +6151,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2122034014}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
+      propertyPath: enemyHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: mapWayPoints.Array.size
       value: 12
       objectReference: {fileID: 0}
@@ -6595,6 +6599,10 @@ PrefabInstance:
       propertyPath: roadTilemap
       value: 
       objectReference: {fileID: 19578811}
+    - target: {fileID: 4577344643457165652, guid: c98020e9d0f45435baf3ec8623cdbd9f, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 2122034014}
     - target: {fileID: 4577344643457165653, guid: c98020e9d0f45435baf3ec8623cdbd9f, type: 3}
       propertyPath: m_Name
       value: TowerSelector
@@ -18075,6 +18083,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fa5f1744e313f94890a6ad892466591, type: 3}
+--- !u!1 &1497041395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5206770224036030009, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+  m_PrefabInstance: {fileID: 885699411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1497041397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497041395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97de6a9f557678a42886428b534d24ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 1497041398}
+  playerManager: {fileID: 2122034014}
+--- !u!114 &1497041398 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5206770224036029991, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+  m_PrefabInstance: {fileID: 885699411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497041395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1577397349
 PrefabInstance:
   m_ObjectHideFlags: 0
