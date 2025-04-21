@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 10.0f;
     public PlayerManager manager; 
-    public int health = 50;
+    public int health = 100;
     public GameObject[] waypoints;
     int currentWP = 0;
-    public string TakeDamageType = "magic";
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +29,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log("Enemy health" + health);
+        Debug.Log(health);
 
         if (health <= 0)
         {
