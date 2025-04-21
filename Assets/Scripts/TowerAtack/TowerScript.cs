@@ -4,16 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Timeline;
 
+[ExecuteAlways]
 public class TowerScript : MonoBehaviour
 {
 
     public int damage = 10;
     public float attackCooldown = 1f;
+
+    public float attackRange = 4f;
     private float lastAttackTime = 0f;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
-    
+
     public GameObject bulletPrefab;
+
+    private void Awake()
+    {
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        // Sync collider to attack range
+        collider.radius = attackRange;
+
+        // Sync range visual scale
+        Transform rangeVisual = transform.Find("RangeVisual");
+        if (rangeVisual != null)
+        {
+            float spriteRadius = 0.5f; // assuming the circle sprite is 1 unit wide
+            float scaleFactor = attackRange / spriteRadius;
+            rangeVisual.localScale = Vector3.one * scaleFactor;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -54,10 +73,10 @@ public class TowerScript : MonoBehaviour
     {
         if (enemy != null)
         {
-          GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-          Bullet bulletScript = bullet.GetComponent<Bullet>();
-          bulletScript.SetTarget(enemy.transform);
-          bulletScript.damage = damage;
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.SetTarget(enemy.transform);
+            bulletScript.damage = damage;
 
         }
     }
