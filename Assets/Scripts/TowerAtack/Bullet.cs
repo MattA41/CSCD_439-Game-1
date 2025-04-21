@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public int damage = 10;
     private Transform target;
+    public string damageType = "magic";
 
     public void SetTarget(Transform targetTransform)
     {
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
+            Debug.Log("target Was null");
             Destroy(gameObject);
             return;
         }
@@ -34,9 +36,14 @@ public class Bullet : MonoBehaviour
         {
             if (target.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                enemy.TakeDamage(damage);
+                if(enemy.TakeDamageType == damageType)
+                {
+                    enemy.TakeDamage(damage);
+                    Destroy(this.gameObject);
+                }
+                
             }
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

@@ -1,60 +1,47 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
+using System.Threading;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public float spawnDelay = 3.0f;
-    private float nextSpawnTime;
-
-    public GameObject[] mapWayPoints;
-    public PlayerManager pmanager;
-    public int enemyHealth = 100;
-    public int enemySpeed = 5;
-
-    public bool IsWaves;
-    public int waveNums = 10;
-    public int enemyStartNum = 10;
-    public int waveDelay = 30;
-    public int enemyAdd = 3;
-
-    private int currEnemyCount;
-    private int currWave;
+    public GameObject[] enemyPrefabs; //prfab for spawning enemys
+    public float spawnDelay = 3.0f; //delay inbetween enemy spawns
+    private float nextSpawnTime; //time when next enemy will spawn
+    //enemy vars
+    public GameObject[] mapWayPoints; //waypoints for enemy navigation
+    public PlayerManager pmanager; //player manager for enemy to affect health
+    public int enemyHealthAdd = 1; //holds the health value for enemys
+    public float enemySpeedAdd = 0.5f; //hold the speed value for enemys
+    //wave management
+    public bool IsWaves; // If the level will have waves set to true
+    public int waveNums = 10; //number of waves for the level
+    public int enemyStartNum = 10; //number of enemys at start
+    public int currWave; //the current waves
+    public int waveDelay = 30; //delay inbetween waves in seconds default is 30 seconds
+    public int enemyAdd = 3; //number of enemys to add at end of wave
+    private int currEnemyCount ; //used to add enemys
     private bool isSpawningWaves = false;
-    private bool isPausedBetweenWaves = false;
 
-    public Button roundButton;      // The single UI button
-    public Sprite playIcon;         // ▶️ sprite
-    public Sprite pauseIcon;        // ⏸️ sprite
-
-    public enum GamePhase
-    {
-        BetweenWaves,
-        Running,
-        Paused
-    }
-
-    private GamePhase currentPhase = GamePhase.BetweenWaves;
-
+    //Start is called before the first frame update
     void Start()
     {
         currEnemyCount = enemyStartNum;
-        Time.timeScale = 1f;
-        SetRoundButtonIcon(playIcon);  // Start with play icon
+        
     }
 
+    //Update is called once per frame
     void Update()
     {
         if (IsWaves)
         {
-            if (!isSpawningWaves)
+            if(!isSpawningWaves)
             {
                 StartCoroutine(WaveSpawner());
             }
-        }
-        else
+            
+        }else
         {
             if (Time.time > nextSpawnTime)
             {
@@ -62,25 +49,19 @@ public class EnemySpawner : MonoBehaviour
                 nextSpawnTime = Time.time + spawnDelay;
             }
         }
-    }
 
-    IEnumerator WaveSpawner()
+        
+    }
+    IEnumerator WaveSpawner() //spawn waves with a wait time without freezing the whole game
     {
         isSpawningWaves = true;
-
-        isPausedBetweenWaves = true;
-        currentPhase = GamePhase.BetweenWaves;
-        SetRoundButtonIcon(playIcon);
-        yield return new WaitUntil(() => isPausedBetweenWaves == false);
-
-        SetRoundButtonIcon(pauseIcon);
-        currentPhase = GamePhase.Running;
 
         for (int i = 0; i < waveNums; i++)
         {
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
+            // Spawn all enemies in the wave
             for (int j = 0; j < currEnemyCount; j++)
             {
                 SpawnEnemy();
@@ -89,70 +70,29 @@ public class EnemySpawner : MonoBehaviour
 
             Debug.Log("Wave " + currWave + " ended");
             currEnemyCount += enemyAdd;
+            Debug.Log("Current enemy count: " + currEnemyCount);
 
-            if (i < waveNums - 1)
-            {
-                isPausedBetweenWaves = true;
-                currentPhase = GamePhase.BetweenWaves;
-                SetRoundButtonIcon(playIcon);
-                yield return new WaitUntil(() => isPausedBetweenWaves == false);
-
-                SetRoundButtonIcon(pauseIcon);
-                currentPhase = GamePhase.Running;
-            }
+            // Wait before the next wave starts
+            yield return new WaitForSeconds(waveDelay);
         }
 
         Debug.Log("All waves complete");
         isSpawningWaves = false;
-        currentPhase = GamePhase.Running;
     }
-
-    public void OnRoundButtonClick()
-    {
-        switch (currentPhase)
-        {
-            case GamePhase.BetweenWaves:
-                isPausedBetweenWaves = false;
-                currentPhase = GamePhase.Running;
-                Time.timeScale = 1f;
-                SetRoundButtonIcon(pauseIcon);
-                break;
-
-            case GamePhase.Running:
-                Time.timeScale = 0f;
-                currentPhase = GamePhase.Paused;
-                SetRoundButtonIcon(playIcon);
-                break;
-
-            case GamePhase.Paused:
-                Time.timeScale = 1f;
-                currentPhase = GamePhase.Running;
-                SetRoundButtonIcon(pauseIcon);
-                break;
-        }
-
-        Debug.Log("Round button clicked. New state: " + currentPhase);
-    }
-
-    void SetRoundButtonIcon(Sprite icon)
-    {
-        if (roundButton != null && icon != null)
-        {
-            Image img = roundButton.GetComponent<Image>();
-            if (img != null)
-            {
-                img.sprite = icon;
-            }
-        }
-    }
-
+    //spawns enemy and hands in values
     void SpawnEnemy()
     {
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+        GameObject enemy = (GameObject)Instantiate(enemyPrefabs[randomIndex], gameObject.transform);
         var enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
-        enemyScript.health = enemyHealth;
-        enemyScript.speed = enemySpeed;
+        if(currWave > 1){
+            enemyScript.health += enemyHealthAdd;
+            enemyScript.speed += enemySpeedAdd;
+        }
+        
     }
+
+    
 }
