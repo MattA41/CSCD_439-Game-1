@@ -52,7 +52,7 @@ public class SwipeController : MonoBehaviour
 
     public void SelectPage()
     {
-        int[] maps = new int[] { 0, 1 }; // Add as many maps as needed
+        int[] maps = new int[] { 0, 1, 2 }; // Add as many maps as needed
 
         if (maps[currentpage] == 0)
         {
@@ -60,7 +60,11 @@ public class SwipeController : MonoBehaviour
         }
         if (maps[currentpage] == 1)
         {
-            SceneManager.LoadScene("Scenes/Map2");
+            SceneManager.LoadScene("Scenes/ActualMap2");
+        }
+        if (maps[currentpage] == 2)
+        {
+            SceneManager.LoadScene("Scenes/ActualMap3");
         }
         else
         {

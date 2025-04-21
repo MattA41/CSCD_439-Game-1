@@ -20,4 +20,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu/SelectScreen.unity
     guid: c01b5723b5f5d4945a08f037c6136bc0
+  - enabled: 1
+    path: Assets/Scenes/ActualMap1.unity
+    guid: 5309a7f0e45334440a403f4559acec09
+  - enabled: 1
+    path: Assets/Scenes/ActualMap2.unity
+    guid: a273d9e82a9a64ef793e85ef524f6c84
+  - enabled: 1
+    path: Assets/Scenes/ActualMap3.unity
+    guid: 67a8edb5164fd4462af451a69a6c6995
   m_configObjects: {}
