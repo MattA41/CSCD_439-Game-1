@@ -56,7 +56,7 @@ public class SwipeController : MonoBehaviour
 
         if (maps[currentpage] == 0)
         {
-            SceneManager.LoadScene("Scenes/Map1");
+            SceneManager.LoadScene("Scenes/ActualMap1");
         }
         if (maps[currentpage] == 1)
         {
