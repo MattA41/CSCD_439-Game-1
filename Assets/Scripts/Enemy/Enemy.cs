@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public int health = 100;
     public GameObject[] waypoints;
     int currentWP = 0;
+    public int worth = 25;
 
     // Start is called before the first frame update
     void Start()

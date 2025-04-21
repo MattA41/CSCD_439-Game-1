@@ -5,26 +5,28 @@ using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
+    //enemy stuff
     public GameObject[] enemyPrefabs;
+    public GameObject defaultEnemy;
     public float spawnDelay = 3.0f;
+    public int enemyAtOnce = 5;
     private float nextSpawnTime;
-
     public GameObject[] mapWayPoints;
     public PlayerManager pmanager;
     public int enemyHealthAdd = 1;
     public float enemySpeedAdd = 0.5f;
+    public int enemyWorth = 25;
 
- 
-        
+    //wave stuff
     public bool IsWaves;
     public int waveNums = 10;
     public int enemyStartNum = 10;
     public int waveDelay = 30;
     public int enemyAdd = 3;
-
     private int currEnemyCount;
-    private int currWave;
+    public int currWave;
     private bool isSpawningWaves = false;
+    //pause stuff
     private bool isPausedBetweenWaves = false;
 
     public Button roundButton;      
@@ -83,11 +85,28 @@ public class EnemySpawner : MonoBehaviour
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
-            for (int j = 0; j < currEnemyCount; j++)
+            if(currWave <= 1)
             {
-                SpawnEnemy();
-                yield return new WaitForSeconds(spawnDelay);
+                for (int j = 0; j < currEnemyCount; j++)
+                {
+                    SpawnEnemy();
+                    yield return new WaitForSeconds(spawnDelay);
+                }
+            }else
+            {
+                int j = 0;
+                while (j < currEnemyCount)
+                {
+                    for (int e = 0; e < enemyAtOnce; e++)
+                    {
+                        SpawnEnemy();
+                        yield return new WaitForSeconds(1);
+                        j++;
+                    }
+                    
+                }
             }
+            
 
             Debug.Log("Wave " + currWave + " ended");
             currEnemyCount += enemyAdd;
@@ -150,12 +169,29 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
-        GameObject enemy = (GameObject)Instantiate(enemyPrefabs[randomIndex], gameObject.transform);
-        var enemyScript = enemy.GetComponent<Enemy>();
+        if(currWave <= 1)
+        {
+           InstantiateEnemy(defaultEnemy);
+        }else
+        {
+            var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            InstantiateEnemy(enemyPrefabs[randomIndex]);
+        }
+
+        
+    
+        
+    }
+
+    void InstantiateEnemy(GameObject enemy)
+    {
+        GameObject createEnemy = (GameObject)Instantiate(enemy, gameObject.transform);
+        var enemyScript = createEnemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
         enemyScript.health += enemyHealthAdd;
         enemyScript.speed += enemySpeedAdd;
+        enemyScript.worth = enemyWorth;
     }
+
 }

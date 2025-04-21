@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   manager: {fileID: 0}
-  health: 50
+  health: 10
   waypoints: []
 --- !u!58 &7272508155365128052
 CircleCollider2D:
