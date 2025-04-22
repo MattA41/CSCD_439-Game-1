@@ -29,9 +29,9 @@ public class EnemySpawner : MonoBehaviour
     //pause stuff
     private bool isPausedBetweenWaves = false;
 
-    public Button roundButton;      
-    public Sprite playIcon;         
-    public Sprite pauseIcon;        
+    public Button roundButton;
+    public Sprite playIcon;
+    public Sprite pauseIcon;
 
     public enum GamePhase
     {
@@ -85,14 +85,15 @@ public class EnemySpawner : MonoBehaviour
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
-            if(currWave <= 1)
+            if (currWave <= 1)
             {
                 for (int j = 0; j < currEnemyCount; j++)
                 {
                     SpawnEnemy();
                     yield return new WaitForSeconds(spawnDelay);
                 }
-            }else
+            }
+            else
             {
                 int j = 0;
                 while (j < currEnemyCount)
@@ -103,10 +104,10 @@ public class EnemySpawner : MonoBehaviour
                         yield return new WaitForSeconds(1);
                         j++;
                     }
-                    
+
                 }
             }
-            
+
 
             Debug.Log("Wave " + currWave + " ended");
             currEnemyCount += enemyAdd;
@@ -169,18 +170,19 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        if(currWave <= 1)
+        if (currWave <= 1)
         {
-           InstantiateEnemy(defaultEnemy);
-        }else
+            InstantiateEnemy(defaultEnemy);
+        }
+        else
         {
             var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
             InstantiateEnemy(enemyPrefabs[randomIndex]);
         }
 
-        
-    
-        
+
+
+
     }
 
     void InstantiateEnemy(GameObject enemy)
@@ -194,4 +196,25 @@ public class EnemySpawner : MonoBehaviour
         enemyScript.worth = enemyWorth;
     }
 
+
+    public void InGameMenuClick()
+    {
+        switch (currentPhase)
+        {
+         
+
+            case GamePhase.Running:
+                Time.timeScale = 0f;
+                currentPhase = GamePhase.Paused;
+                SetRoundButtonIcon(playIcon);
+                break;
+
+                //case GamePhase.Paused:
+                //    Time.timeScale = 1f;
+                //    currentPhase = GamePhase.Running;
+                //    SetRoundButtonIcon(pauseIcon);
+                //    break;
+        }
+
+    }
 }

@@ -6260,7 +6260,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 788012631}
         m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-        m_MethodName: OnRoundButtonClick
+        m_MethodName: InGameMenuClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21339,7 +21339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1285020356616444098, guid: 77d18f7f3c743124a81c72ee47844b15, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1285020356616444098, guid: 77d18f7f3c743124a81c72ee47844b15, type: 3}
       propertyPath: m_AnchoredPosition.y
