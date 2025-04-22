@@ -5,15 +5,17 @@ using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public float spawnDelay = 3.0f;
     private float nextSpawnTime;
 
     public GameObject[] mapWayPoints;
     public PlayerManager pmanager;
-    public int enemyHealth = 100;
-    public int enemySpeed = 5;
+    public int enemyHealthAdd = 1;
+    public float enemySpeedAdd = 0.5f;
 
+ 
+        
     public bool IsWaves;
     public int waveNums = 10;
     public int enemyStartNum = 10;
@@ -25,9 +27,9 @@ public class EnemySpawner : MonoBehaviour
     private bool isSpawningWaves = false;
     private bool isPausedBetweenWaves = false;
 
-    public Button roundButton;      // The single UI button
-    public Sprite playIcon;         // ▶️ sprite
-    public Sprite pauseIcon;        // ⏸️ sprite
+    public Button roundButton;      
+    public Sprite playIcon;         
+    public Sprite pauseIcon;        
 
     public enum GamePhase
     {
@@ -148,11 +150,12 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+        GameObject enemy = (GameObject)Instantiate(enemyPrefabs[randomIndex], gameObject.transform);
         var enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
-        enemyScript.health = enemyHealth;
-        enemyScript.speed = enemySpeed;
+        enemyScript.health += enemyHealthAdd;
+        enemyScript.speed += enemySpeedAdd;
     }
 }
