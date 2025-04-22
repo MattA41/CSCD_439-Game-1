@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
     public int enemyAdd = 3;
 
     private int currEnemyCount;
-    private int currWave;
+    public int currWave;
     private bool isSpawningWaves = false;
     private bool isPausedBetweenWaves = false;
 
