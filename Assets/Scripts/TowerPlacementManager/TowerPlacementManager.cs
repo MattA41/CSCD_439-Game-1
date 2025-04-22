@@ -107,15 +107,14 @@ public class TowerPlacementManager : MonoBehaviour
 
 
     }
-
     private IEnumerator ShowInsufficientFunds()
     {
         isAnimatingFunds = true;
 
         RectTransform rect = insuffFunds.GetComponent<RectTransform>();
         Vector2 startPos = rect.anchoredPosition;
-        Vector2 upPos = new Vector2(startPos.x, 464); // show
-        Vector2 downPos = startPos; // original hidden pos
+        Vector2 upPos = new Vector2(startPos.x, 464);
+        Vector2 downPos = startPos;
 
         float duration = 0.3f;
 
@@ -124,19 +123,19 @@ public class TowerPlacementManager : MonoBehaviour
         while (t < 1f)
         {
             rect.anchoredPosition = Vector2.Lerp(startPos, upPos, t);
-            t += Time.deltaTime / duration;
+            t += Time.unscaledDeltaTime / duration;
             yield return null;
         }
         rect.anchoredPosition = upPos;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSecondsRealtime(1.5f); // also unaffected by timeScale
 
         // Animate down
         t = 0f;
         while (t < 1f)
         {
             rect.anchoredPosition = Vector2.Lerp(upPos, downPos, t);
-            t += Time.deltaTime / duration;
+            t += Time.unscaledDeltaTime / duration;
             yield return null;
         }
         rect.anchoredPosition = downPos;
