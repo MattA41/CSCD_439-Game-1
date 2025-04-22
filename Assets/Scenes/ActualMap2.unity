@@ -6275,6 +6275,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
+      propertyPath: IsWaves
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: playIcon
       value: 
       objectReference: {fileID: 21300000, guid: 7a2b6545e213b55439c289e845ba6492, type: 3}
