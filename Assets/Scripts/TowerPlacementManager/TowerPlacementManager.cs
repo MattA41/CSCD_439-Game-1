@@ -25,6 +25,8 @@ public class TowerPlacementManager : MonoBehaviour
 
     public int cost = 50;
 
+    public Image insuffFunds;
+
     // Update is called once per frame
     void Update()
     {
@@ -82,19 +84,47 @@ public class TowerPlacementManager : MonoBehaviour
             isDragging = true;
             previewTower = Instantiate(towerPrefab);
             previewTower.GetComponent<Collider2D>().enabled = false;
-            previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f); // semi-transparent
+            previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
 
             rangeVisual = previewTower.transform.Find("RangeVisual");
             rangeRenderer = rangeVisual.GetComponent<SpriteRenderer>();
             rangeVisual.gameObject.SetActive(true);
-
         }
         else
         {
             Debug.Log("NOT ENOUGH MONEY!");
+            StartCoroutine(ShowInsufficientFunds());
         }
+    }
 
+    private IEnumerator ShowInsufficientFunds()
+    {
+        RectTransform rect = insuffFunds.GetComponent<RectTransform>();
+        Vector2 startPos = rect.anchoredPosition;
+        Vector2 targetPos = new Vector2(startPos.x, 464); // Slide up
+        float duration = 0.3f;
+        float elapsed = 0f;
 
+        // Move up
+        while (elapsed < duration)
+        {
+            rect.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        rect.anchoredPosition = targetPos;
+
+        yield return new WaitForSeconds(1.5f); // Hold visible for a moment
+
+        // Move down
+        elapsed = 0f;
+        while (elapsed < duration)
+        {
+            rect.anchoredPosition = Vector2.Lerp(targetPos, startPos, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        rect.anchoredPosition = startPos;
     }
 
     private bool IsValidPlacement(Vector3Int gridPos)
