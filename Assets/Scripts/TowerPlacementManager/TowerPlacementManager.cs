@@ -26,6 +26,11 @@ public class TowerPlacementManager : MonoBehaviour
     public int cost = 50;
 
     public Image insuffFunds;
+    private Coroutine fundsCoroutine;
+    private bool isAnimatingFunds = false;
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -93,39 +98,53 @@ public class TowerPlacementManager : MonoBehaviour
         else
         {
             Debug.Log("NOT ENOUGH MONEY!");
-            StartCoroutine(ShowInsufficientFunds());
+
+            if (!isAnimatingFunds)
+            {
+                fundsCoroutine = StartCoroutine(ShowInsufficientFunds());
+            }
         }
+
+
     }
 
     private IEnumerator ShowInsufficientFunds()
     {
+        isAnimatingFunds = true;
+
         RectTransform rect = insuffFunds.GetComponent<RectTransform>();
         Vector2 startPos = rect.anchoredPosition;
-        Vector2 targetPos = new Vector2(startPos.x, 464); // Slide up
+        Vector2 upPos = new Vector2(startPos.x, 464); // show
+        Vector2 downPos = startPos; // original hidden pos
+
         float duration = 0.3f;
-        float elapsed = 0f;
 
-        // Move up
-        while (elapsed < duration)
+        // Animate up
+        float t = 0f;
+        while (t < 1f)
         {
-            rect.anchoredPosition = Vector2.Lerp(startPos, targetPos, elapsed / duration);
-            elapsed += Time.deltaTime;
+            rect.anchoredPosition = Vector2.Lerp(startPos, upPos, t);
+            t += Time.deltaTime / duration;
             yield return null;
         }
-        rect.anchoredPosition = targetPos;
+        rect.anchoredPosition = upPos;
 
-        yield return new WaitForSeconds(1.5f); // Hold visible for a moment
+        yield return new WaitForSeconds(1.5f);
 
-        // Move down
-        elapsed = 0f;
-        while (elapsed < duration)
+        // Animate down
+        t = 0f;
+        while (t < 1f)
         {
-            rect.anchoredPosition = Vector2.Lerp(targetPos, startPos, elapsed / duration);
-            elapsed += Time.deltaTime;
+            rect.anchoredPosition = Vector2.Lerp(upPos, downPos, t);
+            t += Time.deltaTime / duration;
             yield return null;
         }
-        rect.anchoredPosition = startPos;
+        rect.anchoredPosition = downPos;
+
+        isAnimatingFunds = false;
     }
+
+
 
     private bool IsValidPlacement(Vector3Int gridPos)
     {
