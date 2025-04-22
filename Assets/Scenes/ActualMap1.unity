@@ -6414,6 +6414,18 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 2122034014}
+    - target: {fileID: 5206770225389338001, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206770225389338001, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206770225389338001, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 5206770225389338003, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_Name
       value: HealthAndMoneyUICanvas
@@ -21379,6 +21391,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 83683443}
     m_Modifications:
+    - target: {fileID: 4970626537553464761, guid: 7588ef2810695054eb0e4703b3c5cb99, type: 3}
+      propertyPath: m_Name
+      value: WaveText
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970626537553464766, guid: 7588ef2810695054eb0e4703b3c5cb99, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4970626537553464767, guid: 7588ef2810695054eb0e4703b3c5cb99, type: 3}
       propertyPath: enemySpawner
       value: 
