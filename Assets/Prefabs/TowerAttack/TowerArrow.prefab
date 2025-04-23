@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 8592143879797930787}
   - component: {fileID: 5846975582476616771}
   m_Layer: 0
-  m_Name: Tower 01 - Level 01 - Weapon_0
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
