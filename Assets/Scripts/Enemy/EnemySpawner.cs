@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("End Game Popup")]
+    public GameObject EndGamePopup;
+    public Button continueFreePlayButton;
+    public Button returnToMenuButton;
     //enemy stuff
     public GameObject[] enemyPrefabs;
     public GameObject defaultEnemy;
@@ -72,27 +76,30 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawningWaves = true;
 
-        isPausedBetweenWaves = true;
-        currentPhase = GamePhase.BetweenWaves;
-        SetRoundButtonIcon(playIcon);
-        yield return new WaitUntil(() => isPausedBetweenWaves == false);
-
-        SetRoundButtonIcon(pauseIcon);
-        currentPhase = GamePhase.Running;
+    
 
         for (int i = 0; i < waveNums; i++)
-        {
+        {   
+            
+            isPausedBetweenWaves = true;
+            currentPhase = GamePhase.BetweenWaves;
+            SetRoundButtonIcon(playIcon);
+            yield return new WaitUntil(() => isPausedBetweenWaves == false);
+    
+            SetRoundButtonIcon(pauseIcon);
+            currentPhase = GamePhase.Running;
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
-            if(currWave <= 1)
+            if (currWave <= 1)
             {
                 for (int j = 0; j < currEnemyCount; j++)
                 {
                     SpawnEnemy();
                     yield return new WaitForSeconds(spawnDelay);
                 }
-            }else
+            }
+            else
             {
                 int j = 0;
                 while (j < currEnemyCount)
@@ -103,29 +110,40 @@ public class EnemySpawner : MonoBehaviour
                         yield return new WaitForSeconds(1);
                         j++;
                     }
-                    
+
                 }
             }
-            
+
 
             Debug.Log("Wave " + currWave + " ended");
-            currEnemyCount += enemyAdd;
-
-            if (i < waveNums - 1)
+            if (currWave == 50 && EndGamePopup != null)    //Change currWave to desired end round
             {
-                isPausedBetweenWaves = true;
-                currentPhase = GamePhase.BetweenWaves;
-                SetRoundButtonIcon(playIcon);
-                yield return new WaitUntil(() => isPausedBetweenWaves == false);
+                Time.timeScale = 0f;
+                EndGamePopup.SetActive(true);
 
-                SetRoundButtonIcon(pauseIcon);
-                currentPhase = GamePhase.Running;
+                continueFreePlayButton.onClick.RemoveAllListeners();
+                returnToMenuButton.onClick.RemoveAllListeners();
+
+                continueFreePlayButton.onClick.AddListener(() =>
+                {
+                    Time.timeScale = 1f;
+                    EndGamePopup.SetActive(false);
+                    IsWaves = false; // switch to free play
+                });
+
+                returnToMenuButton.onClick.AddListener(() =>
+                {
+                    Time.timeScale = 1f;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Menu/MainMenu");
+                });
+
+                // Optional: skip remaining waves in test
+                yield break;
             }
-        }
 
-        Debug.Log("All waves complete");
-        isSpawningWaves = false;
-        currentPhase = GamePhase.Running;
+
+            currEnemyCount += enemyAdd;
+        }
     }
 
     public void OnRoundButtonClick()
