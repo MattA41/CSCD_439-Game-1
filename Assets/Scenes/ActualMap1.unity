@@ -6442,6 +6442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthAndMoneyUICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5206770225389338003, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5206770225389338014, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_Camera
       value: 
