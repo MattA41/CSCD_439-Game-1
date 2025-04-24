@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [Header("References")]
+    public GameObject impactPrefab;
+
     [Header("Properties")]
     public float speed = 10f;
     public int damage = 10;
@@ -22,14 +25,14 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
+
         Vector2 direction = (target.position - transform.position).normalized;
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
-        
+
         // Rotate bullet to face the target + offset by 90 degrees
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-        
+
         // Check distance
         if (Vector2.Distance(transform.position, target.position) < .5f)
         {
@@ -37,6 +40,12 @@ public class Bullet : MonoBehaviour
             if (target != null && target.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.TakeDamage(damage);
+            }
+
+            if (impactPrefab != null)
+            {
+                GameObject impact = Instantiate(impactPrefab, transform.position, Quaternion.identity);
+                Destroy(impact, 0.5f);
             }
 
             // Destroy projectile after hitting

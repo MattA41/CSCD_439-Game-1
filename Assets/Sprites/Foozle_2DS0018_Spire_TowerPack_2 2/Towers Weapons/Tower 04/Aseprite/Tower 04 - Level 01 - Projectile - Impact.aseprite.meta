@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 1655ee6af83504e49b2e16449aa82e81
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: Tower 04 - Level 01 - Projectile - Impact_Clip
+    second: {fileID: 7400000, guid: e17ce4b4306b54870a12c64b04344d78, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -73,7 +78,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -86,7 +91,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 7
+    defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 4
     spritePadding: 0
@@ -95,7 +100,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 638810316474071160
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,7 +126,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Frame_0
     originalName: 
-    pivot: {x: 0.5, y: -0.19354838}
+    pivot: {x: 0.5, y: 0.83870965}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -141,7 +146,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 84}
   - name: Frame_2
     originalName: 
-    pivot: {x: 0.5, y: -0.1875}
+    pivot: {x: 0.5, y: 0.8125}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -161,7 +166,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: Frame_3
     originalName: 
-    pivot: {x: 0.5, y: -0.1875}
+    pivot: {x: 0.5, y: 0.8125}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -181,7 +186,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 44}
   - name: Frame_4
     originalName: 
-    pivot: {x: 0.5, y: -0.20000002}
+    pivot: {x: 0.5, y: 0.86666673}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -201,7 +206,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 123}
   - name: Frame_5
     originalName: 
-    pivot: {x: 0.5, y: -0.22222222}
+    pivot: {x: 0.5, y: 0.962963}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -221,7 +226,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 161}
   - name: Frame_6
     originalName: 
-    pivot: {x: 0.5, y: -0.22222222}
+    pivot: {x: 0.5, y: 0.962963}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -311,6 +316,28 @@ ScriptedImporter:
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: DefaultTexturePlatform
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0
     crunchedCompression: 0
