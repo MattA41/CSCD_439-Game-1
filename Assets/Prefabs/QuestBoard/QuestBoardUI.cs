@@ -9,7 +9,7 @@ public class QuestBoardUI : MonoBehaviour
     public PlayerManager playerManager;
     public EnemySpawner enemySpawner;
     private bool hasCompletedRound5Quest = false;
-
+    private bool hasntLostHealthRnd20 = false;
 
     private bool hasSpawned = false;
 
@@ -22,21 +22,27 @@ public class QuestBoardUI : MonoBehaviour
         if (hasSpawned) return;
         hasSpawned = true;
 
-        AddQuest("Make it to Round 5 without damage", "Get 100 coins if you make it to round 5 without losing any coins!");
-        AddQuest("Seasoned Vet", "Get to round 20 without losing any health.");
+        AddQuest("Untouchable", " Make it to Round 5 without damage. Get 100 coins!");
+        AddQuest("Seasoned Vet", "Get to round 20 without losing any health. Get 5 hearts!");
     }
 
     void Update()
     {
         if (!hasCompletedRound5Quest && enemySpawner.currWave == 5 && playerManager.health == 50) //Add coins if met
         {
-            EditQuest("Make it to Round 5 without damage", "Complete! 100 Coins added.");
+            EditQuest("Untouchable", "Complete! 100 Coins added ✅");
             playerManager.coins = playerManager.coins + 100;
             hasCompletedRound5Quest = true;
         }
         else if(enemySpawner.currWave > 5 && playerManager.health <= 50)  //Delete Quest if not met
         {
             RemoveQuest("Make it to Round 5 without damage");
+        }
+        if(!hasntLostHealthRnd20 && enemySpawner.currWave == 20 && playerManager.health == 50)
+        {
+            EditQuest("Seasoned Vet", "Complete! +5 health");
+            playerManager.health = playerManager.health + 5;
+            hasntLostHealthRnd20 = true;
         }
     }
     
