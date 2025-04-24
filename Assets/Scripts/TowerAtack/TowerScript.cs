@@ -8,15 +8,19 @@ using UnityEngine.Timeline;
 public class TowerScript : MonoBehaviour
 {
 
+    
+    [Header("Properties")]
     public int damage = 10;
     public float attackCooldown = 1f;
-
     public float attackRange = 4f;
-    private float lastAttackTime = 0f;
+    
+
+    [Header("References")]
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
-
-    public GameObject bulletPrefab;
+    private float lastAttackTime = 0f;
 
     private void Awake()
     {
@@ -73,7 +77,7 @@ public class TowerScript : MonoBehaviour
     {
         if (enemy != null)
         {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.SetTarget(enemy.transform);
             bulletScript.damage = damage;

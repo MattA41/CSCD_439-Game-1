@@ -29,13 +29,16 @@ public class Bullet : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         
-        // Optionally: destroy if close enough
+        // Check distance
         if (Vector2.Distance(transform.position, target.position) < .5f)
         {
-            if (target.TryGetComponent<Enemy>(out Enemy enemy))
+            // Null check after damage, in case it destroys the enemy
+            if (target != null && target.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 enemy.TakeDamage(damage);
             }
+
+            // Destroy projectile after hitting
             Destroy(gameObject);
         }
     }
