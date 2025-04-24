@@ -5,31 +5,37 @@ using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("End Game Popup")]
+    public GameObject EndGamePopup;
+    public Button continueFreePlayButton;
+    public Button returnToMenuButton;
+    //enemy stuff
     public GameObject[] enemyPrefabs;
+    public GameObject defaultEnemy;
     public float spawnDelay = 3.0f;
+    public int enemyAtOnce = 5;
     private float nextSpawnTime;
-
     public GameObject[] mapWayPoints;
     public PlayerManager pmanager;
     public int enemyHealthAdd = 1;
     public float enemySpeedAdd = 0.5f;
+    public int enemyWorth = 25;
 
- 
-        
+    //wave stuff
     public bool IsWaves;
     public int waveNums = 10;
     public int enemyStartNum = 10;
     public int waveDelay = 30;
     public int enemyAdd = 3;
-
     private int currEnemyCount;
-    private int currWave;
+    public int currWave;
     private bool isSpawningWaves = false;
+    //pause stuff
     private bool isPausedBetweenWaves = false;
 
-    public Button roundButton;      
-    public Sprite playIcon;         
-    public Sprite pauseIcon;        
+    public Button roundButton;
+    public Sprite playIcon;
+    public Sprite pauseIcon;
 
     public enum GamePhase
     {
@@ -70,43 +76,74 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawningWaves = true;
 
-        isPausedBetweenWaves = true;
-        currentPhase = GamePhase.BetweenWaves;
-        SetRoundButtonIcon(playIcon);
-        yield return new WaitUntil(() => isPausedBetweenWaves == false);
-
-        SetRoundButtonIcon(pauseIcon);
-        currentPhase = GamePhase.Running;
+    
 
         for (int i = 0; i < waveNums; i++)
-        {
+        {   
+            
+            isPausedBetweenWaves = true;
+            currentPhase = GamePhase.BetweenWaves;
+            SetRoundButtonIcon(playIcon);
+            yield return new WaitUntil(() => isPausedBetweenWaves == false);
+    
+            SetRoundButtonIcon(pauseIcon);
+            currentPhase = GamePhase.Running;
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
-            for (int j = 0; j < currEnemyCount; j++)
+            if (currWave <= 1)
             {
-                SpawnEnemy();
-                yield return new WaitForSeconds(spawnDelay);
+                for (int j = 0; j < currEnemyCount; j++)
+                {
+                    SpawnEnemy();
+                    yield return new WaitForSeconds(spawnDelay);
+                }
             }
+            else
+            {
+                int j = 0;
+                while (j < currEnemyCount)
+                {
+                    for (int e = 0; e < enemyAtOnce; e++)
+                    {
+                        SpawnEnemy();
+                        yield return new WaitForSeconds(1);
+                        j++;
+                    }
+
+                }
+            }
+
 
             Debug.Log("Wave " + currWave + " ended");
-            currEnemyCount += enemyAdd;
-
-            if (i < waveNums - 1)
+            if (currWave == 50 && EndGamePopup != null)    //Change currWave to desired end round
             {
-                isPausedBetweenWaves = true;
-                currentPhase = GamePhase.BetweenWaves;
-                SetRoundButtonIcon(playIcon);
-                yield return new WaitUntil(() => isPausedBetweenWaves == false);
+                Time.timeScale = 0f;
+                EndGamePopup.SetActive(true);
 
-                SetRoundButtonIcon(pauseIcon);
-                currentPhase = GamePhase.Running;
+                continueFreePlayButton.onClick.RemoveAllListeners();
+                returnToMenuButton.onClick.RemoveAllListeners();
+
+                continueFreePlayButton.onClick.AddListener(() =>
+                {
+                    Time.timeScale = 1f;
+                    EndGamePopup.SetActive(false);
+                    IsWaves = false; // switch to free play
+                });
+
+                returnToMenuButton.onClick.AddListener(() =>
+                {
+                    Time.timeScale = 1f;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Menu/MainMenu");
+                });
+
+                // Optional: skip remaining waves in test
+                yield break;
             }
-        }
 
-        Debug.Log("All waves complete");
-        isSpawningWaves = false;
-        currentPhase = GamePhase.Running;
+
+            currEnemyCount += enemyAdd;
+        }
     }
 
     public void OnRoundButtonClick()
@@ -150,12 +187,51 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
-        GameObject enemy = (GameObject)Instantiate(enemyPrefabs[randomIndex], gameObject.transform);
-        var enemyScript = enemy.GetComponent<Enemy>();
+        if (currWave <= 1)
+        {
+            InstantiateEnemy(defaultEnemy);
+        }
+        else
+        {
+            var randomIndex = UnityEngine.Random.Range(0, enemyPrefabs.Length);
+            InstantiateEnemy(enemyPrefabs[randomIndex]);
+        }
+
+
+
+
+    }
+
+    void InstantiateEnemy(GameObject enemy)
+    {
+        GameObject createEnemy = (GameObject)Instantiate(enemy, gameObject.transform);
+        var enemyScript = createEnemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
         enemyScript.health += enemyHealthAdd;
         enemyScript.speed += enemySpeedAdd;
+        enemyScript.worth = enemyWorth;
+    }
+
+
+    public void InGameMenuClick()
+    {
+        switch (currentPhase)
+        {
+         
+
+            case GamePhase.Running:
+                Time.timeScale = 0f;
+                currentPhase = GamePhase.Paused;
+                SetRoundButtonIcon(playIcon);
+                break;
+
+                //case GamePhase.Paused:
+                //    Time.timeScale = 1f;
+                //    currentPhase = GamePhase.Running;
+                //    SetRoundButtonIcon(pauseIcon);
+                //    break;
+        }
+
     }
 }
