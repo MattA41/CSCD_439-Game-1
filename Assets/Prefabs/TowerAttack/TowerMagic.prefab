@@ -332,6 +332,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f12759ee243614420abe1eade479f056, type: 2}
+    - target: {fileID: 3626916397498700004, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2796822739370938514, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
+    - target: {fileID: 3626916397498700004, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -354,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: a6a15831aa2a442b683a449bb7cb1334, type: 3}
       propertyPath: m_LocalPosition.z
