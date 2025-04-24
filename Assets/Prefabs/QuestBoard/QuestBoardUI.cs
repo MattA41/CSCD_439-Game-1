@@ -34,7 +34,7 @@ public class QuestBoardUI : MonoBehaviour
             playerManager.coins = playerManager.coins + 100;
             hasCompletedRound5Quest = true;
         }
-        else if(enemySpawner.currWave >= 2 && playerManager.health <= 50)  //Delete Quest if not met
+        else if(enemySpawner.currWave > 5 && playerManager.health <= 50)  //Delete Quest if not met
         {
             RemoveQuest("Make it to Round 5 without damage");
         }
