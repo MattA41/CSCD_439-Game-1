@@ -32,7 +32,7 @@ public class QuestBoardUI : MonoBehaviour
         AddQuest("Defeat 3 Goblins", "Find and eliminate 3 goblins near the camp.");
         AddQuest("Rescue the Villager", "Locate and escort the missing villager back.");
         AddQuest("Defeat 3 Goblins", "Find and eliminate 3 goblins near the camp.");
-        AddQuest("Rescue the Villager", "Locate and escort the missing villager back.");
+       // AddQuest("Rescue the Villager", "Locate and escort the missing villager back.");
         
     }
 
