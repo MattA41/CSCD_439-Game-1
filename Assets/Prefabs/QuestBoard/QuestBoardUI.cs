@@ -8,9 +8,11 @@ public class QuestBoardUI : MonoBehaviour
     public Transform questContentArea;
     public PlayerManager playerManager;
     public EnemySpawner enemySpawner;
+    private bool hasCompletedRound5Quest = false;
+
 
     private bool hasSpawned = false;
-    private bool hasTriggeredHighCoinsQuest = false;
+
 
     // Track quests by title
     private Dictionary<string, GameObject> activeQuests = new Dictionary<string, GameObject>();
@@ -20,23 +22,27 @@ public class QuestBoardUI : MonoBehaviour
         if (hasSpawned) return;
         hasSpawned = true;
 
-        AddQuest("Defeat 3 Goblins", "Find and eliminate 3 goblins near the camp.");
+        AddQuest("Make it to Round 5 without damage", "Get 100 coins if you make it to round 5 without losing any coins!");
         AddQuest("Seasoned Vet", "Get to round 20 without losing any health.");
     }
 
     void Update()
     {
-        if (!hasTriggeredHighCoinsQuest && playerManager.coins >= 500)
+        if (!hasCompletedRound5Quest && enemySpawner.currWave == 5 && playerManager.health == 50) //Add coins if met
         {
-            AddQuest("NiceJob", "You got more than 500 coins!");
-            hasTriggeredHighCoinsQuest = true;
+            EditQuest("Make it to Round 5 without damage", "Complete! 100 Coins added.");
+            playerManager.coins = playerManager.coins + 100;
+            hasCompletedRound5Quest = true;
         }
-        if (!hasTriggeredHighCoinsQuest && enemySpawner.currWave >= 2)
+        else if(enemySpawner.currWave >= 2 && playerManager.health <= 50)  //Delete Quest if not met
         {
-            EditQuest("Defeat 3 Goblins", "LOL");
+            RemoveQuest("Make it to Round 5 without damage");
         }
-
     }
+    
+
+    
+      
 
     public void AddQuest(string title, string description)
     {
