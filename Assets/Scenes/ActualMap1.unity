@@ -6972,6 +6972,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5206770225389338014, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5206770225389338015, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
