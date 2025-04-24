@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         
         // Rotate bullet to face the target + offset by 90 degrees
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         
         // Check distance
         if (Vector2.Distance(transform.position, target.position) < .5f)
