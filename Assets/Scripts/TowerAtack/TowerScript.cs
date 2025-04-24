@@ -21,6 +21,7 @@ public class TowerScript : MonoBehaviour
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private float lastAttackTime = 0f;
+    private Animator weaponAnimator;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class TowerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        weaponAnimator = transform.Find("Weapon").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -77,6 +79,7 @@ public class TowerScript : MonoBehaviour
     {
         if (enemy != null)
         {
+            weaponAnimator?.SetTrigger("Attack"); 
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.SetTarget(enemy.transform);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [Header("Properties")]
     public float speed = 10f;
     public int damage = 10;
     private Transform target;
