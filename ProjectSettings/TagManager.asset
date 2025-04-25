@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Waypoint
+  - Enemy
+  - Tower
+  - Goal
+  - TowerSelector
   layers:
   - Default
   - TransparentFX
@@ -11,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -38,6 +43,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 2664753641
+    locked: 0
+  - name: Ground
+    uniqueID: 709215561
+    locked: 0
+  - name: Road
+    uniqueID: 3646265629
+    locked: 0
+  - name: Details
+    uniqueID: 200644481
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
