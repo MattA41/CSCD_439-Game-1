@@ -7,25 +7,23 @@ using UnityEngine.Tilemaps;
 
 public class TowerPlacementManager : MonoBehaviour
 {
-    public GameObject towerPrefab;
-
-
     [Header("Tilemap Settings")]
-    public Tilemap roadTilemap; // Assign red path tilemap here
+    public Tilemap roadTilemap;
+
+    [Header("UI Settings")]
+    public Image insuffFunds;
+
+    [Header("Player Settings")]
+    public PlayerManager playerManager;
+
+    private GameObject towerPrefab;
+    private int cost;
 
     private GameObject previewTower;
     private SpriteRenderer rangeRenderer;
     private Transform rangeVisual;
 
-
     private bool isDragging = false;
-
-
-    public PlayerManager playerManager;
-
-    public int cost = 50;
-
-    public Image insuffFunds;
     private Coroutine fundsCoroutine;
     private bool isAnimatingFunds = false;
 
@@ -35,51 +33,39 @@ public class TowerPlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isDragging) return;
+
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int gridPos = roadTilemap.WorldToCell(mouseWorldPos); // still used for tile check
+        Vector3Int gridPos = roadTilemap.WorldToCell(mouseWorldPos);
 
-        if (!isDragging)
+        if (previewTower != null)
         {
-            // Only check for click on the TowerSelector when we're not already dragging
-            if (Input.GetMouseButtonDown(0))
-            {
-                RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+            previewTower.transform.position = mouseWorldPos;
 
-                if (hit.collider != null && hit.collider.CompareTag("TowerSelector"))
+            bool isValid = IsValidPlacement(gridPos);
+            rangeRenderer.color = isValid ? new Color(0f, 1f, 0f, 0.3f) : new Color(1f, 0f, 0f, 0.3f);
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (isValid && playerManager.coins >= cost)
                 {
-                    StartDragTower();
+                    PlaceTower();
+                    playerManager.coins -= cost;
                 }
-            }
-        }
-        else
-        {
-            // Drag in progress: follow mouse
-            if (previewTower != null)
-            {
-                previewTower.transform.position = mouseWorldPos;
-
-                bool isValid = IsValidPlacement(gridPos);
-                rangeRenderer.color = isValid
-                    ? new Color(0f, 1f, 0f, 0.3f) // green
-                    : new Color(1f, 0f, 0f, 0.3f); // red
-
-                // Place when mouse is released
-                if (Input.GetMouseButtonUp(0))
+                else
                 {
-                    if (isValid && playerManager.coins >= cost)
-                    {
-                        PlaceTower();
-                        playerManager.coins -= cost;
-                    }
-                    else
-                    {
-                        CancelPlacement();
-                    }
-
+                    CancelPlacement();
                 }
             }
         }
 
+    }
+
+     public void SetTowerToPlace(GameObject prefab, int towerCost)
+    {
+        towerPrefab = prefab;
+        cost = towerCost;
+        StartDragTower();
     }
 
     private void StartDragTower()
@@ -164,10 +150,5 @@ public class TowerPlacementManager : MonoBehaviour
         isDragging = false;
         Destroy(previewTower);
         previewTower = null;
-
-        playerManager.coins = playerManager.coins - cost;
-
-
-
     }
 }
