@@ -5425,7 +5425,7 @@ RectTransform:
   - {fileID: 1732547082}
   - {fileID: 1721930542}
   m_Father: {fileID: 83683443}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5684,6 +5684,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4577344643457165652, guid: c98020e9d0f45435baf3ec8623cdbd9f, type: 3}
+      propertyPath: insuffFunds
+      value: 
+      objectReference: {fileID: 1041479297}
     - target: {fileID: 4577344643457165652, guid: c98020e9d0f45435baf3ec8623cdbd9f, type: 3}
       propertyPath: roadTilemap
       value: 
@@ -22125,7 +22129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2368450423786643515, guid: 6e4ebbe417c94844d9fd3c3d6f690973, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2368450423786643515, guid: 6e4ebbe417c94844d9fd3c3d6f690973, type: 3}
       propertyPath: m_AnchorMax.x
