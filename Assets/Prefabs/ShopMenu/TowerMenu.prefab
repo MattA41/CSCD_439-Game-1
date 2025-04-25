@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 630558443986249239}
   - component: {fileID: 425103928106599884}
   - component: {fileID: 4228667296854256412}
+  - component: {fileID: 5495888140591806720}
   m_Layer: 5
   m_Name: AOETower
   m_TagString: Untagged
@@ -225,6 +226,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5495888140591806720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056165938473381154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52554ba67c184564bf75a92550cb3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 2912400287819524416, guid: d5c6a97f1ebb140ef9f5f2ee7aa7d593, type: 3}
+  towerCost: 60
+  placementManager: {fileID: 0}
 --- !u!1 &1238165553731664402
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +409,7 @@ GameObject:
   - component: {fileID: 4816440390987878872}
   - component: {fileID: 8722347689691998337}
   - component: {fileID: 4205395287177262585}
+  - component: {fileID: 4224376639373963548}
   m_Layer: 5
   m_Name: MapicTower
   m_TagString: Untagged
@@ -504,6 +521,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4224376639373963548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176173069817779202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52554ba67c184564bf75a92550cb3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 2912400287819524416, guid: 27108af4f3d8c0c45977e2dd408a8329, type: 3}
+  towerCost: 50
+  placementManager: {fileID: 0}
 --- !u!1 &2321820817397455567
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +548,7 @@ GameObject:
   - component: {fileID: 8051854189737493219}
   - component: {fileID: 1787053857583722845}
   - component: {fileID: 7461342233104533874}
+  - component: {fileID: 969050359970421614}
   m_Layer: 5
   m_Name: ArrowTower
   m_TagString: Untagged
@@ -627,6 +660,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &969050359970421614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2321820817397455567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52554ba67c184564bf75a92550cb3cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefab: {fileID: 2912400287819524416, guid: 94b1fc4ee991d4a34ad80fb7027a77c1, type: 3}
+  towerCost: 40
+  placementManager: {fileID: 0}
 --- !u!1 &3299131078936652366
 GameObject:
   m_ObjectHideFlags: 0
