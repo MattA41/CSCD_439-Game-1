@@ -33,16 +33,15 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("moveX", direction.x);
         animator.SetFloat("moveY", direction.y);
 
-        // Flip for left-facing movement
+        // Handle flipping only if moving horizontally more than vertically
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
-            spriteRenderer.flipX = direction.x > 0;
+            if (direction.x > 0.01f)
+                spriteRenderer.flipX = true; // Walk right (flip)
+            else if (direction.x < -0.01f)
+                spriteRenderer.flipX = false; // Walk left (normal)
         }
-
-        // // Flip sprite when walking left
-        // if (direction.x < -0.1f) spriteRenderer.flipX = true;
-        // else if (direction.x > 0.1f) spriteRenderer.flipX = false;
-
+        
         // Move toward waypoint
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
