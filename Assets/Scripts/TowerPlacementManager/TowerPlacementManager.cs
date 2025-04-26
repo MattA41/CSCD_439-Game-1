@@ -92,7 +92,7 @@ public class TowerPlacementManager : MonoBehaviour
 
 
     }
-    private IEnumerator ShowInsufficientFunds()
+    public IEnumerator ShowInsufficientFunds()
     {
         isAnimatingFunds = true;
 
