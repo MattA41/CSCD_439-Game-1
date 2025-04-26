@@ -11,10 +11,12 @@ public class TowerSlotDrag : MonoBehaviour, IPointerDownHandler
     public Text costText;
     public int towerCost;
     private Image background;         // The image behind the icon
+    private Color originalColor;       // The original color of the icon
     private RectTransform iconTransform; // Optional: reference to icon if you want only that to shake
     public TowerPlacementManager placementManager;
 
-     private Vector3 originalPosition;
+    private Vector3 originalPosition;
+    private Coroutine shakeCoroutine;
 
     private void Start()
     {
@@ -25,6 +27,7 @@ public class TowerSlotDrag : MonoBehaviour, IPointerDownHandler
 
         background = GetComponent<Image>();
         iconTransform = GetComponent<RectTransform>();
+        originalColor = background.color;
 
         if (iconTransform != null) originalPosition = iconTransform.localPosition;
     }
@@ -36,14 +39,20 @@ public class TowerSlotDrag : MonoBehaviour, IPointerDownHandler
         }
         else
         {
-            StartCoroutine(ShowErrorFeedback());
+            if (shakeCoroutine != null)
+            {
+                StopCoroutine(shakeCoroutine);
+                ResetVisuals();
+            }
+
+            shakeCoroutine = StartCoroutine(ShowErrorFeedback());
+            placementManager.StartCoroutine(placementManager.ShowInsufficientFunds());
         }
     }
 
     IEnumerator ShowErrorFeedback()
     {
         // Flash red background
-        Color originalColor = background.color;
         background.color = Color.red;
 
         // Shake icon
@@ -62,5 +71,12 @@ public class TowerSlotDrag : MonoBehaviour, IPointerDownHandler
 
         iconTransform.anchoredPosition = originalAnchoredPos;
         background.color = originalColor;
+        shakeCoroutine = null;
+    }
+
+    private void ResetVisuals()
+    {
+        if (iconTransform != null) iconTransform.anchoredPosition = originalPosition;
+        if (background != null) background.color = originalColor;
     }
 }
