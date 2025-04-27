@@ -15,10 +15,20 @@ public class WaveUIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private int lastWave = -1;
+
+    private void Update()
     {
-        waveText.text = "Wave: " + enemySpawner.currWave.ToString();
+        if (waveText != null && enemySpawner != null)
+        {
+            if (enemySpawner.currWave != lastWave)
+            {
+                lastWave = enemySpawner.currWave;
+                waveText.text = "Wave: " + lastWave.ToString();
+            }
+        }
     }
 
- 
+
+
 }
