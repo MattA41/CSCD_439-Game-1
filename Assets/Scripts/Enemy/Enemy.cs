@@ -54,7 +54,8 @@ public class Enemy : MonoBehaviour
         if (isDead) return; // Already dead, ignore further damage
 
         health -= damage;
-        Debug.Log(health);
+
+        StartCoroutine(DamageFlash());
 
         if (health <= 0)
         {
@@ -93,5 +94,16 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        if (spriteRenderer != null)
+        {
+            Color originalColor = spriteRenderer.color;
+            spriteRenderer.color = Color.red;   // Flash red
+            yield return new WaitForSeconds(0.1f); // Flash duration
+            spriteRenderer.color = originalColor; // Back to normal
+        }
     }
 }
