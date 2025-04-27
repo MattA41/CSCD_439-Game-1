@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log(health);
+        Debug.Log("Enemy health " + health);
 
         if (health <= 0)
         {
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour
     {
         animator.SetTrigger("Die");
         speed = 0f;
-        CollectMoney(25);
+        CollectMoney(worth);
         StartCoroutine(DeathSequence());
     }
 
