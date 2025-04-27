@@ -112,6 +112,9 @@ public class EnemySpawner : MonoBehaviour
 
             if (currWave == waves.Count && EndGamePopup != null)
             {
+
+                // Wait until all enemies are dead
+                yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag("Enemy").Length == 0);
                 Time.timeScale = 0f;
                 EndGamePopup.SetActive(true);
 
@@ -135,7 +138,11 @@ public class EnemySpawner : MonoBehaviour
             }
 
             // 💥 If you still want a small break between waves, you can do
-            yield return new WaitForSeconds(3f); // (optional, shorter, not 30s)
+            if (currWave != waves.Count)
+            {
+                yield return new WaitForSeconds(3f);
+            }
+
 
         }
 
@@ -302,7 +309,7 @@ public class EnemySpawner : MonoBehaviour
         waves.Add(new WaveInfo // Wave 4
         {
             enemyPrefabs = new GameObject[] { enemyPrefabs[2], enemyPrefabs[0] }, // Slow + Normal
-            enemyCount = 15,
+            enemyCount = 10,
             spawnInterval = 1.8f
         });
 
