@@ -54,8 +54,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            CollectMoney(25);
+            Die();
         }
     }
 
@@ -75,5 +74,19 @@ public class Enemy : MonoBehaviour
             Debug.Log("goal reached " + manager.health);
             Destroy(this.gameObject);
         }
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Die");
+        speed = 0f;
+        CollectMoney(25);
+        StartCoroutine(DeathSequence());
+    }
+
+    IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }
