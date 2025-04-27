@@ -26,6 +26,7 @@ public class TowerPlacementManager : MonoBehaviour
     private bool isDragging = false;
     private Coroutine fundsCoroutine;
     private bool isAnimatingFunds = false;
+    private HashSet<Vector3Int> occupiedCells = new HashSet<Vector3Int>();
 
 
 
@@ -36,10 +37,11 @@ public class TowerPlacementManager : MonoBehaviour
 
         Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPos = roadTilemap.WorldToCell(mouseWorldPos);
+        Vector3 snappedWorldPos = roadTilemap.GetCellCenterWorld(gridPos);
 
         if (previewTower != null)
         {
-            previewTower.transform.position = mouseWorldPos;
+            previewTower.transform.position = snappedWorldPos;
 
             bool isValid = IsValidPlacement(gridPos);
             rangeRenderer.color = isValid ? new Color(0f, 1f, 0f, 0.3f) : new Color(1f, 0f, 0f, 0.3f);
@@ -60,7 +62,7 @@ public class TowerPlacementManager : MonoBehaviour
 
     }
 
-     public void SetTowerToPlace(GameObject prefab, int towerCost)
+    public void SetTowerToPlace(GameObject prefab, int towerCost)
     {
         towerPrefab = prefab;
         cost = towerCost;
@@ -73,7 +75,13 @@ public class TowerPlacementManager : MonoBehaviour
         {
             isDragging = true;
             previewTower = Instantiate(towerPrefab);
-            previewTower.GetComponent<Collider2D>().enabled = false;
+
+            // Disable ALL colliders during dragging
+            foreach (Collider2D col in previewTower.GetComponents<Collider2D>())
+            {
+                col.enabled = false;
+            }
+
             previewTower.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
 
             rangeVisual = previewTower.transform.Find("RangeVisual");
@@ -132,13 +140,35 @@ public class TowerPlacementManager : MonoBehaviour
 
     private bool IsValidPlacement(Vector3Int gridPos)
     {
-        return roadTilemap.GetTile(gridPos) == null;
+        if (roadTilemap.GetTile(gridPos) != null)
+            return false;
+
+        if (occupiedCells.Contains(gridPos))
+            return false; // Already a tower in this cell
+
+        return true;
     }
 
     private void PlaceTower()
     {
         isDragging = false;
-        previewTower.GetComponent<Collider2D>().enabled = true;
+
+        // Disable ALL colliders during dragging
+        foreach (Collider2D col in previewTower.GetComponents<Collider2D>())
+        {
+            col.enabled = true;
+        }
+
+        // Save this cell as occupied
+        Vector3Int centerCell = roadTilemap.WorldToCell(previewTower.transform.position);
+        occupiedCells.Add(centerCell);
+
+        // Also mark neighbors
+        occupiedCells.Add(centerCell + new Vector3Int(1, 0, 0));
+        occupiedCells.Add(centerCell + new Vector3Int(-1, 0, 0));
+        occupiedCells.Add(centerCell + new Vector3Int(0, 1, 0));
+        occupiedCells.Add(centerCell + new Vector3Int(0, -1, 0));
+
         previewTower.GetComponent<SpriteRenderer>().color = Color.white;
         rangeVisual.gameObject.SetActive(false);
         previewTower = null;
