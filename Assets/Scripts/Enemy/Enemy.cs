@@ -33,15 +33,14 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("moveX", direction.x);
         animator.SetFloat("moveY", direction.y);
 
-        // Handle flipping only if moving horizontally more than vertically
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
             if (direction.x > 0.01f)
-                spriteRenderer.flipX = true; // Walk right (flip)
+                spriteRenderer.flipX = true;  // walking right
             else if (direction.x < -0.01f)
-                spriteRenderer.flipX = false; // Walk left (normal)
+                spriteRenderer.flipX = false; // walking left
         }
-        
+
         // Move toward waypoint
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
