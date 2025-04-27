@@ -105,7 +105,8 @@ MonoBehaviour:
   attackCooldown: 1
   attackRange: 3
   firePoint: {fileID: 5081528645663193235}
-  bulletPrefab: {fileID: 4709083612906800395, guid: 5259d3098d577734e9354d2855e49384, type: 3}
+  bulletPrefab: {fileID: 8324107251422109927, guid: 8576850058ae04f82b6aff8274f05e5a, type: 3}
+  canRotateWeapon: 0
 --- !u!58 &2912400287819524423
 CircleCollider2D:
   m_ObjectHideFlags: 0
