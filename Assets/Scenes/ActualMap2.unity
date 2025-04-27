@@ -6864,7 +6864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8089020611582790963, guid: 68ef92bafb77ebb449150224f1997262, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.9
+      value: -16.12
       objectReference: {fileID: 0}
     - target: {fileID: 8089020611582790963, guid: 68ef92bafb77ebb449150224f1997262, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7556,7 +7556,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 111808411, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 578439480, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
@@ -7588,7 +7588,7 @@ PrefabInstance:
       objectReference: {fileID: 2122034014}
     - target: {fileID: 1812255055, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 282804017768119078, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7612,7 +7612,7 @@ PrefabInstance:
       objectReference: {fileID: 1738683144}
     - target: {fileID: 765368716467795311, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1953937876978042391, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: costText
@@ -7620,7 +7620,7 @@ PrefabInstance:
       objectReference: {fileID: 2123116811}
     - target: {fileID: 1953937876978042391, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: towerCost
-      value: 50
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1953937876978042391, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
@@ -7646,6 +7646,10 @@ PrefabInstance:
       propertyPath: costText
       value: 
       objectReference: {fileID: 179934979}
+    - target: {fileID: 3228810614002592869, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3228810614002592869, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
       value: 
@@ -7756,7 +7760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5506543539513313658, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6964681363561236631, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
@@ -7802,6 +7806,10 @@ PrefabInstance:
       propertyPath: costText
       value: 
       objectReference: {fileID: 820604386}
+    - target: {fileID: 7924251955602607627, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 7924251955602607627, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
       value: 
@@ -7887,7 +7895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1522804880461740623, guid: 2fa5f1744e313f94890a6ad892466591, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.62
+      value: -16.78
       objectReference: {fileID: 0}
     - target: {fileID: 1522804880461740623, guid: 2fa5f1744e313f94890a6ad892466591, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21346,6 +21354,10 @@ PrefabInstance:
     - target: {fileID: 687347713795911435, guid: 11cf63fe81a606b4b88c1ebd0402ae31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 687347713795911444, guid: 11cf63fe81a606b4b88c1ebd0402ae31, type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 687347713795911445, guid: 11cf63fe81a606b4b88c1ebd0402ae31, type: 3}
       propertyPath: m_Name

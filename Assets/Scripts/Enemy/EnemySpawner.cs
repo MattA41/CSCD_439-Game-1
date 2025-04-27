@@ -372,5 +372,77 @@ public class EnemySpawner : MonoBehaviour
             waves.Add(new WaveInfo { enemyPrefabs = new GameObject[] { enemyPrefabs[2], enemyPrefabs[2] }, enemyCount = 18, spawnInterval = 1.7f }); // Wave 9
             waves.Add(new WaveInfo { enemyPrefabs = new GameObject[] { enemyPrefabs[2] }, enemyCount = 10, spawnInterval = 1.5f }); // Wave 10 (Slow heavy)
         }
+        else if (sceneName == "ActualMap3")
+        {
+            waves.Add(new WaveInfo // Wave 1
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[0] }, // Normal
+                enemyCount = 12,
+                spawnInterval = 1.8f
+            });
+
+            waves.Add(new WaveInfo // Wave 2
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[1] }, // Fast
+                enemyCount = 10,
+                spawnInterval = 1.2f
+            });
+
+            waves.Add(new WaveInfo // Wave 3
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[0], enemyPrefabs[1] }, // Normal + Fast
+                enemyCount = 16,
+                spawnInterval = 1.5f
+            });
+
+            waves.Add(new WaveInfo // Wave 4
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[2], enemyPrefabs[0] }, // Slow + Normal
+                enemyCount = 15,
+                spawnInterval = 1.7f
+            });
+
+            waves.Add(new WaveInfo // Wave 5
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[1] }, // Fast swarm
+                enemyCount = 20,
+                spawnInterval = 0.9f
+            });
+
+            waves.Add(new WaveInfo // Wave 6
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[2] }, // Slow Tank wave
+                enemyCount = 18,
+                spawnInterval = 1.4f
+            });
+
+            waves.Add(new WaveInfo // Wave 7
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[0], enemyPrefabs[1], enemyPrefabs[2] }, // All types
+                enemyCount = 24,
+                spawnInterval = 1.2f
+            });
+
+            waves.Add(new WaveInfo // Wave 8
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[0] }, // Normal spam
+                enemyCount = 30,
+                spawnInterval = 1f
+            });
+
+            waves.Add(new WaveInfo // Wave 9
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[1], enemyPrefabs[2] }, // Fast and Slow mix
+                enemyCount = 30,
+                spawnInterval = 0.8f
+            });
+
+            waves.Add(new WaveInfo // Wave 10
+            {
+                enemyPrefabs = new GameObject[] { enemyPrefabs[2] }, // Big tank wave
+                enemyCount = 12,
+                spawnInterval = 1.5f
+            });
+        }
     }
 }

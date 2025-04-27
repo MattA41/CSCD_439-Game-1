@@ -7693,6 +7693,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &30069347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8621693484122937456, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+  m_PrefabInstance: {fileID: 885699411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &111808410 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 111808410, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
@@ -8530,6 +8541,18 @@ PrefabInstance:
       propertyPath: placementManager
       value: 
       objectReference: {fileID: 4577344643209522311}
+    - target: {fileID: 1953937876978042391, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: costText
+      value: 
+      objectReference: {fileID: 1251401873}
+    - target: {fileID: 1953937876978042391, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953937876978042391, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: placementManager
+      value: 
+      objectReference: {fileID: 4577344643209522311}
     - target: {fileID: 2033991301805651517, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8546,6 +8569,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3228810614002592869, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: costText
+      value: 
+      objectReference: {fileID: 30069347}
+    - target: {fileID: 3228810614002592869, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3228810614002592869, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: placementManager
+      value: 
+      objectReference: {fileID: 4577344643209522311}
     - target: {fileID: 3682117845579309438, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: towerCost
       value: 50
@@ -8686,6 +8721,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7924251955602607627, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: costText
+      value: 
+      objectReference: {fileID: 1824174106}
+    - target: {fileID: 7924251955602607627, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924251955602607627, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: placementManager
+      value: 
+      objectReference: {fileID: 4577344643209522311}
     - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: towerCost
       value: 200
@@ -8906,6 +8953,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fa5f1744e313f94890a6ad892466591, type: 3}
+--- !u!114 &1251401873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7445862065974208930, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+  m_PrefabInstance: {fileID: 885699411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1380704368
 GameObject:
   m_ObjectHideFlags: 0
@@ -22929,6 +22987,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1824174106 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4580905124870884736, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+  m_PrefabInstance: {fileID: 885699411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1892542773 stripped
