@@ -12,9 +12,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         isGameOver = false;
-
-        Screen.SetResolution(1920, 1080, false);
-
+        
         QualitySettings.vSyncCount = 1;
     }
 
