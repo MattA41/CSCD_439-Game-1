@@ -1,25 +1,46 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class ButtonClickSound : MonoBehaviour
+public class ButtonClickSound: MonoBehaviour
 {
-    public AudioClip clickSound; // Assign the click sound in the inspector
+    public AudioClip clickSound;
     private AudioSource audioSource;
+
+    public float delayBeforeLoad = 0.0f; // delay to allow sound to play
 
     private void Start()
     {
+        Debug.Log("SceneLoaderWithSound: Start() called"); // ADD THIS
+
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        audioSource.volume = 0.7f; // Adjust as you like
         audioSource.clip = clickSound;
+        audioSource.volume = 0.7f;
 
         Button button = GetComponent<Button>();
-        button.onClick.AddListener(PlayClickSound);
+        button.onClick.AddListener(OnButtonClicked);
     }
 
-    private void PlayClickSound()
+
+    private void OnButtonClicked()
     {
+        Debug.Log("Button was clicked!"); // <-- ADD THIS
+
         audioSource.Play();
+        //StartCoroutine(LoadSceneAfterDelay());
     }
+
+
+    //private IEnumerator LoadSceneAfterDelay()
+    //{
+    //    Debug.Log("Trying to load scene: " + sceneToLoad);
+
+    //    yield return new WaitForSeconds(delayBeforeLoad);
+    //    SceneManager.LoadScene(sceneToLoad);
+
+    //}
 }
+
