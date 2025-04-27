@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2289089671237583087}
   - component: {fileID: 4667024495174397702}
   - component: {fileID: 7100935183262872106}
-  - component: {fileID: 1908303181339153996}
+  - component: {fileID: -6876023638690481462}
   m_Layer: 0
   m_Name: AOEProjectile
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1908303181339153996
+--- !u!114 &-6876023638690481462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,9 +116,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1308718325649795210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4ca4049bfc8ce41a9cd1dec35c0c4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 965b3d081c3334c55b96f62af4167627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactPrefab: {fileID: 6484329758861951442, guid: 70957f728f18c4cd891661264d83632a, type: 3}
-  speed: 10
-  damage: 10
+  explosionPrefab: {fileID: 6484329758861951442, guid: 70957f728f18c4cd891661264d83632a, type: 3}
+  speed: 7
+  damage: 8
+  explosionRadius: 2.5
+  lifetime: 3

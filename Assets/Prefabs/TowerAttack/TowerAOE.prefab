@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2912400287819524421}
   - component: {fileID: 2912400287819524418}
-  - component: {fileID: 2912400287819524419}
   - component: {fileID: 2912400287819524423}
+  - component: {fileID: 6936355888653045144}
   m_Layer: 0
   m_Name: TowerAOE
   m_TagString: Tower
@@ -89,24 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2912400287819524419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2912400287819524416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e5c94341c187fd488555cf305bab665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  attackCooldown: 0.8
-  attackRange: 4
-  firePoint: {fileID: 5904657914196244914}
-  bulletPrefab: {fileID: 1308718325649795210, guid: 1053394d3aee648d1ae53db6351dc4af, type: 3}
-  canRotateWeapon: 1
 --- !u!58 &2912400287819524423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -123,6 +105,29 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
+--- !u!114 &6936355888653045144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912400287819524416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0070a7cda7242cf9568fdbb2abcd73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackCooldown: 1
+  attackRange: 4
+  firePoint: {fileID: 5904657914196244914}
+  bulletPrefab: {fileID: 1308718325649795210, guid: 1053394d3aee648d1ae53db6351dc4af, type: 3}
+  canRotateWeapon: 1
+  explosionPrefab: {fileID: 0}
+  speed: 7
+  damage: 8
+  explosionRadius: 2.5
+  lifetime: 3
 --- !u!1 &4632235041414530462
 GameObject:
   m_ObjectHideFlags: 0

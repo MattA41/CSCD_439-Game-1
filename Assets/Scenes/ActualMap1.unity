@@ -8651,7 +8651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5206770225389338015, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5206770225389338015, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -8763,7 +8763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: towerCost
-      value: 80
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
@@ -23087,7 +23087,7 @@ Transform:
   - {fileID: 19578809}
   - {fileID: 1619981196}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2122034013
 PrefabInstance:
