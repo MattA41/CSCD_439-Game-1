@@ -30,12 +30,12 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log(health);
+        Debug.Log("Enemy health " + health);
 
         if (health <= 0)
         {
             Destroy(gameObject);
-            CollectMoney(25);
+            CollectMoney(worth);
         }
     }
 

@@ -49,9 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   manager: {fileID: 0}
-  health: 100
+  health: 50
   waypoints: []
-  TakeDamageType: magic
+  worth: 25
 --- !u!212 &2878242272796124087
 SpriteRenderer:
   m_ObjectHideFlags: 0

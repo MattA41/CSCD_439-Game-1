@@ -104,6 +104,8 @@ MonoBehaviour:
   damage: 20
   attackCooldown: 3
   attackRange: 10
+  isAOE: 1
+  radius: 1
   firePoint: {fileID: 5904657914196244914}
   bulletPrefab: {fileID: 1308718325649795210, guid: 1053394d3aee648d1ae53db6351dc4af, type: 3}
 --- !u!58 &2912400287819524423
@@ -121,7 +123,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
 --- !u!1 &4632235041414530462
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 5139232549670443737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2912400287819524421}

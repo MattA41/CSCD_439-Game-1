@@ -13,6 +13,9 @@ public class TowerScript : MonoBehaviour
     public int damage = 10;
     public float attackCooldown = 1f;
     public float attackRange = 4f;
+    [Header("AOE Stuff")]
+    public bool isAOE = false;
+    public float radius;
     
 
     [Header("References")]
@@ -60,7 +63,7 @@ public class TowerScript : MonoBehaviour
     {
         if (enemiesInRange.Count > 0 && Time.time >= lastAttackTime + attackCooldown)
         {
-            Debug.Log(enemiesInRange.Count);
+            Debug.Log("enemies in range " + enemiesInRange.Count);
             Attack(enemiesInRange[0]);
             lastAttackTime = Time.time;
         }
@@ -93,6 +96,8 @@ public class TowerScript : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.SetTarget(enemy.transform);
+            bulletScript.isAOE = isAOE;
+            bulletScript.radius = radius;
             bulletScript.damage = damage;
 
         }

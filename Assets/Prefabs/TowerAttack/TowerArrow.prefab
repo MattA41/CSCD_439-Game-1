@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  attackCooldown: 1
+  attackCooldown: 0.6
   attackRange: 5
   firePoint: {fileID: 5743834613177386855}
   bulletPrefab: {fileID: 75827140240955473, guid: 37db3f8d5e4d34906a16a242717a1abe, type: 3}

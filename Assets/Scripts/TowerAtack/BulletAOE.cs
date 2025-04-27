@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletAOE : MonoBehaviour
 {
     [Header("References")]
     public GameObject impactPrefab;
@@ -11,9 +11,8 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public int damage = 10;
     private Transform target;
-    public bool isAOE;
-    public float radius;
-    
+    List <GameObject> currentCollisions = new List <GameObject> ();
+
     public void SetTarget(Transform targetTransform)
     {
         target = targetTransform;
@@ -37,19 +36,16 @@ public class Bullet : MonoBehaviour
 
         // Check distance
         if (Vector2.Distance(transform.position, target.position) < .5f)
-        {   
-            if (isAOE)
+        {
+            // Null check after damage, in case it destroys the enemy
+            foreach(GameObject gObject in currentCollisions)
             {
-                aoeAttack();
-            }
-            else
-            {
-                // Null check after damage, in case it destroys the enemy
                 if (target != null && target.TryGetComponent<Enemy>(out Enemy enemy))
                 {
                     enemy.TakeDamage(damage);
                 }
             }
+
             if (impactPrefab != null)
             {
                 GameObject impact = Instantiate(impactPrefab, transform.position, Quaternion.identity);
@@ -60,19 +56,14 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
 
-    public void aoeAttack(){
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(gameObject.transform.position, radius);
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        currentCollisions.Add(other.gameObject);
+    }
 
-        foreach (var hit in hitColliders)
-        {
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if(enemy != null)
-            {
-                Debug.Log("hit object AOE "+ hit);
-                enemy.TakeDamage(damage);
-            }
-        }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        currentCollisions.Remove(other.gameObject);
     }
 }
