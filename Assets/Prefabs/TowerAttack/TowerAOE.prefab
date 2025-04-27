@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  attackCooldown: 1
-  attackRange: 3
+  attackCooldown: 0.8
+  attackRange: 4
   firePoint: {fileID: 5904657914196244914}
   bulletPrefab: {fileID: 1308718325649795210, guid: 1053394d3aee648d1ae53db6351dc4af, type: 3}
   canRotateWeapon: 1

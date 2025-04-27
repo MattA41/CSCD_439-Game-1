@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     public int enemyWorth = 25;
 
     [Header("Wave stuff")]
+    public List<WaveInfo> waves = new List<WaveInfo>();
     public bool IsWaves;
     public int waveNums = 10;
     public int enemyStartNum = 10;
@@ -31,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
     private int currEnemyCount;
     public int currWave;
     private bool isSpawningWaves = false;
-    
+
     [Header("Pause stuff")]
     private bool isPausedBetweenWaves = false;
 
@@ -53,6 +54,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
+        SetupWaves(); 
+
         currEnemyCount = enemyStartNum;
         Time.timeScale = 1f;
         SetRoundButtonIcon(playIcon);  // Start with play icon
@@ -67,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
                 StartCoroutine(WaveSpawner());
             }
         }
-        else if(isTutorial)
+        else if (isTutorial)
         {
             StartCoroutine(TutorialSpawner());
         }
@@ -79,52 +82,42 @@ public class EnemySpawner : MonoBehaviour
                 nextSpawnTime = Time.time + spawnDelay;
             }
         }
-        
+
     }
 
     IEnumerator WaveSpawner()
     {
         isSpawningWaves = true;
 
-        for (int i = 0; i < waveNums; i++)
-        {   
-            
+        for (int i = 0; i < waves.Count; i++)
+        {
+
             isPausedBetweenWaves = true;
             currentPhase = GamePhase.BetweenWaves;
             SetRoundButtonIcon(playIcon);
             yield return new WaitUntil(() => isPausedBetweenWaves == false);
-    
+
             SetRoundButtonIcon(pauseIcon);
             currentPhase = GamePhase.Running;
             currWave = i + 1;
             Debug.Log("Wave " + currWave + " started");
 
-            if (currWave <= 1)
-            {
-                for (int j = 0; j < currEnemyCount; j++)
-                {
-                    SpawnEnemy();
-                    yield return new WaitForSeconds(spawnDelay);
-                }
-            }
-            else
-            {
-                int j = 0;
-                while (j < currEnemyCount)
-                {
-                    for (int e = 0; e < enemyAtOnce; e++)
-                    {
-                        SpawnEnemy();
-                        yield return new WaitForSeconds(2);
-                        j++;
-                    }
+            WaveInfo currentWave = waves[i];
 
-                }
-            }
+            for (int j = 0; j < currentWave.enemyCount; j++)
+            {
+                // Pick a random enemy from this wave
+                int randomIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
+                GameObject enemyPrefab = currentWave.enemyPrefabs[randomIndex];
 
+                SpawnEnemyType(enemyPrefab);
+                yield return new WaitForSeconds(currentWave.spawnInterval);
+            }
 
             Debug.Log("Wave " + currWave + " ended");
-            if (currWave == waveNums && EndGamePopup != null)    //Change currWave to desired end round
+
+            // If this was the last wave:
+            if (currWave == waves.Count && EndGamePopup != null)
             {
                 Time.timeScale = 0f;
                 EndGamePopup.SetActive(true);
@@ -145,15 +138,12 @@ public class EnemySpawner : MonoBehaviour
                     UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/Menu/MainMenu");
                 });
 
-                // Optional: skip remaining waves in test
                 yield break;
             }
-
-
-            currEnemyCount += enemyAdd;
         }
 
         isSpawningWaves = false;
+
     }
 
     IEnumerator TutorialSpawner()
@@ -162,10 +152,10 @@ public class EnemySpawner : MonoBehaviour
         currentPhase = GamePhase.BetweenWaves;
         SetRoundButtonIcon(playIcon);
         yield return new WaitUntil(() => isPausedBetweenWaves == false);
-        
+
         SetRoundButtonIcon(pauseIcon);
         currentPhase = GamePhase.Running;
-        
+
         //spawn default
         currWave = 1;
         Debug.Log("Wave " + currWave + " started");
@@ -175,11 +165,11 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnDelay);
         }
         yield return new WaitForSeconds(waveDelay);
-        
+
         //spawn fast
         currWave = 2;
         Debug.Log("Wave " + currWave + " started");
-        for( int i = 0; i <= 4; i++)
+        for (int i = 0; i <= 4; i++)
         {
             SpawnEnemyType(enemyPrefabs[2]);
             yield return new WaitForSeconds(spawnDelay);
@@ -264,7 +254,6 @@ public class EnemySpawner : MonoBehaviour
         enemyScript.manager = pmanager;
         enemyScript.health += enemyHealthAdd;
         enemyScript.speed += enemySpeedAdd;
-        enemyScript.worth = enemyWorth;
     }
 
 
@@ -272,7 +261,7 @@ public class EnemySpawner : MonoBehaviour
     {
         switch (currentPhase)
         {
-         
+
 
             case GamePhase.Running:
                 Time.timeScale = 0f;
@@ -287,5 +276,80 @@ public class EnemySpawner : MonoBehaviour
                 //    break;
         }
 
+    }
+
+    private void SetupWaves()
+    {
+        waves = new List<WaveInfo>();
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[0] }, // Normal enemy
+            enemyCount = 10,
+            spawnInterval = 2f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[0] }, // Normal enemy
+            enemyCount = 12,
+            spawnInterval = 1.8f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[1], enemyPrefabs[0] }, // Fast + Normal
+            enemyCount = 14,
+            spawnInterval = 1.5f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[2], enemyPrefabs[0] }, // Slow + Normal
+            enemyCount = 15,
+            spawnInterval = 1.8f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[1] }, // Fast only
+            enemyCount = 15,
+            spawnInterval = 1f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[2], enemyPrefabs[0] }, // Slow + Normal
+            enemyCount = 16,
+            spawnInterval = 1.5f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[0] }, // Normal
+            enemyCount = 20,
+            spawnInterval = 1.2f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[1], enemyPrefabs[2] }, // Fast + Slow
+            enemyCount = 20,
+            spawnInterval = 1f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[1], enemyPrefabs[0] }, // Fast swarm
+            enemyCount = 25,
+            spawnInterval = 0.8f
+        });
+
+        waves.Add(new WaveInfo
+        {
+            enemyPrefabs = new GameObject[] { enemyPrefabs[2]}, // Slow tank wave
+            enemyCount = 15,
+            spawnInterval = 1.5f
+        });
     }
 }

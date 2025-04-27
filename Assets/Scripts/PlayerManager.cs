@@ -10,16 +10,36 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && health <= 0){
+        if (!isDead && health <= 0)
+        {
+            Die();
+        }
+    }
 
-            health = 0;
-            isDead = true;
+    private void Die()
+    {
+        health = 0;
+        isDead = true;
+        Debug.Log("Player Died!");
+    }
+
+    public bool TrySpendCoins(int amount)
+    {
+        if (coins >= amount)
+        {
+            coins -= amount;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not enough coins!");
+            return false;
         }
     }
 

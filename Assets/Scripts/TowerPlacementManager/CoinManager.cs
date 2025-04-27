@@ -8,6 +8,8 @@ public class CoinManager : MonoBehaviour
     public Text coinText;
     public PlayerManager playerManager;
     // Start is called before the first frame update
+
+    private int lastCoins = -1;
     void Start()
     {
         playerManager = FindObjectOfType<PlayerManager>();
@@ -16,11 +18,15 @@ public class CoinManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinText.text = playerManager.coins.ToString();
+        if (playerManager.coins != lastCoins)
+        {
+            lastCoins = playerManager.coins;
+            coinText.text = lastCoins.ToString();
+        }
     }
-    
+
     public void TowerPlaced()
     {
-       playerManager.PlaceBasicTower();
+        playerManager.PlaceBasicTower();
     }
 }

@@ -8226,7 +8226,7 @@ PrefabInstance:
       objectReference: {fileID: 1732547083}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: mapWayPoints.Array.size
@@ -8236,6 +8236,14 @@ PrefabInstance:
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 7272508155365128048, guid: 359cf1de4a826794585579cbfca5d475, type: 3}
+    - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 266736228040519873, guid: 2a55fb9fc0a4dcf409dee728eca76f43, type: 3}
+    - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
+      propertyPath: enemyPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 5207882048231017155, guid: 63958b6ee0355384abd952af1bb90aa4, type: 3}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: mapWayPoints.Array.data[0]
       value: 
@@ -8590,6 +8598,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 345440899845982988, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 345440899845982988, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
       value: 
       objectReference: {fileID: 1233922547}
@@ -8608,6 +8620,10 @@ PrefabInstance:
     - target: {fileID: 2033991301805651517, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682117845579309438, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3682117845579309438, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
@@ -8744,6 +8760,10 @@ PrefabInstance:
     - target: {fileID: 7921559448744408452, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
+      propertyPath: towerCost
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
@@ -23119,6 +23139,10 @@ PrefabInstance:
     - target: {fileID: 687347713795911435, guid: 11cf63fe81a606b4b88c1ebd0402ae31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 687347713795911444, guid: 11cf63fe81a606b4b88c1ebd0402ae31, type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 687347713795911445, guid: 11cf63fe81a606b4b88c1ebd0402ae31, type: 3}
       propertyPath: m_Name
