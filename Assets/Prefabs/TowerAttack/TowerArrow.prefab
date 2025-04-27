@@ -117,11 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a62bda1cc5c94cb5b3ee6f32b36d9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  attackCooldown: 1
+  damage: 12
+  attackCooldown: 0.5
   attackRange: 4
   firePoint: {fileID: 5743834613177386855}
   bulletPrefab: {fileID: 75827140240955473, guid: 37db3f8d5e4d34906a16a242717a1abe, type: 3}
+  canRotateWeapon: 1
 --- !u!1 &5022104734258211658
 GameObject:
   m_ObjectHideFlags: 0

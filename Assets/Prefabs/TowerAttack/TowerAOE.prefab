@@ -118,16 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  attackCooldown: 1
+  attackCooldown: 5
   attackRange: 4
   firePoint: {fileID: 5904657914196244914}
   bulletPrefab: {fileID: 1308718325649795210, guid: 1053394d3aee648d1ae53db6351dc4af, type: 3}
   canRotateWeapon: 1
-  explosionPrefab: {fileID: 0}
-  speed: 7
-  damage: 8
-  explosionRadius: 2.5
-  lifetime: 3
 --- !u!1 &4632235041414530462
 GameObject:
   m_ObjectHideFlags: 0

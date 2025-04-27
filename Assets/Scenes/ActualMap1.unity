@@ -8763,7 +8763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: towerCost
-      value: 10
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8227532973044417296, guid: 3c32de1bc7b8b4f0a9044b02aea8fad3, type: 3}
       propertyPath: placementManager
