@@ -508,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyAdd
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: playIcon
@@ -548,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 7272508155365128048, guid: 359cf1de4a826794585579cbfca5d475, type: 3}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemySpeedAdd
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyStartNum
@@ -556,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyAtOnceAdd
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: returnToMenuButton

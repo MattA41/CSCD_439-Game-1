@@ -8194,7 +8194,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 9c12d42d78dae724d88b2710905c8938, type: 3}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyWorth
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: spawnDelay
@@ -8219,6 +8219,10 @@ PrefabInstance:
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyStartNum
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
+      propertyPath: enemyAtOnceAdd
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyHealthAdd
