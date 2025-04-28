@@ -6925,6 +6925,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 961659166}
     - target: {fileID: 4101912335623509914, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
+      propertyPath: towerCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101912335623509914, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
       propertyPath: placementManager
       value: 
       objectReference: {fileID: 961659166}
@@ -7553,7 +7557,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 9c12d42d78dae724d88b2710905c8938, type: 3}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyWorth
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: spawnDelay
