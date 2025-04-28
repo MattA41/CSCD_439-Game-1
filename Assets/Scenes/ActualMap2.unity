@@ -7178,6 +7178,33 @@ PrefabInstance:
       objectReference: {fileID: 2122034014}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
+--- !u!114 &171003296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4334621329827647417, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
+  m_PrefabInstance: {fileID: 171003295}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &171003297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4334621329854779037, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
+  m_PrefabInstance: {fileID: 171003295}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &171003298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4334621330365076236, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
+  m_PrefabInstance: {fileID: 171003295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &191857561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7543,7 +7570,7 @@ PrefabInstance:
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: EndGamePopup
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 171003298}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: defaultEnemy
       value: 
@@ -7555,11 +7582,11 @@ PrefabInstance:
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: returnToMenuButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 171003296}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: continueFreePlayButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 171003297}
     - target: {fileID: 2543875909111830373, guid: 3ba9d998c40a47f4a8bb0a6964ff91bc, type: 3}
       propertyPath: enemyPrefabs.Array.size
       value: 3
