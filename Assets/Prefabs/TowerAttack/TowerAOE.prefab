@@ -108,6 +108,7 @@ MonoBehaviour:
   radius: 1
   firePoint: {fileID: 5904657914196244914}
   bulletPrefab: {fileID: 1308718325649795210, guid: 1053394d3aee648d1ae53db6351dc4af, type: 3}
+  canRotateWeapon: 1
 --- !u!58 &2912400287819524423
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4632235041414530462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.656, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -334,9 +335,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ac3e006a0a7b84dda89b74f6c59f6703, type: 2}
+    - target: {fileID: 3626916397498700004, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 331238571, guid: 3a26bc787efac4700ab80844c5fe30f1, type: 3}
     - target: {fileID: 3626916397498700004, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_RootOrder
@@ -344,15 +357,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.74
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 57b78746f4c5e49359f8f753c70e88b4, type: 3}
       propertyPath: m_LocalPosition.z
