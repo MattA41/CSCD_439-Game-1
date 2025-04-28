@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
     public int enemyHealthAdd = 1;
     public float enemySpeedAdd = 0.5f;
     public int enemyWorth = 25;
+    public int enemyAtOnceAdd = 3;
 
     [Header("Wave stuff")]
     public bool IsWaves;
@@ -120,6 +121,7 @@ public class EnemySpawner : MonoBehaviour
                     }
 
                 }
+                enemyAtOnce = enemyAtOnce + enemyAtOnceAdd;
             }
 
 
