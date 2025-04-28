@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2289089671237583087}
   - component: {fileID: 4667024495174397702}
   - component: {fileID: 7100935183262872106}
-  - component: {fileID: 1908303181339153996}
+  - component: {fileID: -8634276212226962333}
   m_Layer: 0
   m_Name: AOEProjectile
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1908303181339153996
+--- !u!114 &-8634276212226962333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,3 +122,5 @@ MonoBehaviour:
   impactPrefab: {fileID: 6484329758861951442, guid: 70957f728f18c4cd891661264d83632a, type: 3}
   speed: 10
   damage: 10
+  isAOE: 1
+  radius: 1

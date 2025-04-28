@@ -9,7 +9,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject EndGamePopup;
     public Button continueFreePlayButton;
     public Button returnToMenuButton;
-    //enemy stuff
+
+    [Header("Enemy stuff")]
     public GameObject[] enemyPrefabs;
     public GameObject defaultEnemy;
     public float spawnDelay = 3.0f;
@@ -20,8 +21,9 @@ public class EnemySpawner : MonoBehaviour
     public int enemyHealthAdd = 1;
     public float enemySpeedAdd = 0.5f;
     public int enemyWorth = 25;
+    public int enemyAtOnceAdd = 3;
 
-    //wave stuff
+    [Header("Wave stuff")]
     public bool IsWaves;
     public int waveNums = 10;
     public int enemyStartNum = 10;
@@ -30,7 +32,8 @@ public class EnemySpawner : MonoBehaviour
     private int currEnemyCount;
     public int currWave;
     private bool isSpawningWaves = false;
-    //pause stuff
+    
+    [Header("Pause stuff")]
     private bool isPausedBetweenWaves = false;
 
     public Button roundButton;
@@ -43,6 +46,9 @@ public class EnemySpawner : MonoBehaviour
         Running,
         Paused
     }
+
+    [Header("tutorial stuff")]
+    public bool isTutorial;
 
     private GamePhase currentPhase = GamePhase.BetweenWaves;
 
@@ -62,6 +68,10 @@ public class EnemySpawner : MonoBehaviour
                 StartCoroutine(WaveSpawner());
             }
         }
+        else if(isTutorial)
+        {
+            StartCoroutine(TutorialSpawner());
+        }
         else
         {
             if (Time.time > nextSpawnTime)
@@ -70,13 +80,12 @@ public class EnemySpawner : MonoBehaviour
                 nextSpawnTime = Time.time + spawnDelay;
             }
         }
+        
     }
 
     IEnumerator WaveSpawner()
     {
         isSpawningWaves = true;
-
-    
 
         for (int i = 0; i < waveNums; i++)
         {   
@@ -107,16 +116,17 @@ public class EnemySpawner : MonoBehaviour
                     for (int e = 0; e < enemyAtOnce; e++)
                     {
                         SpawnEnemy();
-                        yield return new WaitForSeconds(1);
+                        yield return new WaitForSeconds(0.5f);
                         j++;
                     }
 
                 }
+                enemyAtOnce = enemyAtOnce + enemyAtOnceAdd;
             }
 
 
             Debug.Log("Wave " + currWave + " ended");
-            if (currWave == 50 && EndGamePopup != null)    //Change currWave to desired end round
+            if (currWave == waveNums && EndGamePopup != null)    //Change currWave to desired end round
             {
                 Time.timeScale = 0f;
                 EndGamePopup.SetActive(true);
@@ -144,6 +154,50 @@ public class EnemySpawner : MonoBehaviour
 
             currEnemyCount += enemyAdd;
         }
+
+        isSpawningWaves = false;
+    }
+
+    IEnumerator TutorialSpawner()
+    {
+        isPausedBetweenWaves = true;
+        currentPhase = GamePhase.BetweenWaves;
+        SetRoundButtonIcon(playIcon);
+        yield return new WaitUntil(() => isPausedBetweenWaves == false);
+        
+        SetRoundButtonIcon(pauseIcon);
+        currentPhase = GamePhase.Running;
+        
+        //spawn default
+        currWave = 1;
+        Debug.Log("Wave " + currWave + " started");
+        for (int i = 0; i <= 5; i++)
+        {
+            SpawnEnemyType(enemyPrefabs[1]);
+            yield return new WaitForSeconds(spawnDelay);
+        }
+        yield return new WaitForSeconds(waveDelay);
+        
+        //spawn fast
+        currWave = 2;
+        Debug.Log("Wave " + currWave + " started");
+        for( int i = 0; i <= 4; i++)
+        {
+            SpawnEnemyType(enemyPrefabs[2]);
+            yield return new WaitForSeconds(spawnDelay);
+        }
+        yield return new WaitForSeconds(waveDelay);
+        //spawn slow
+        currWave = 3;
+        Debug.Log("Wave " + currWave + " started");
+        for (int i = 0; i <= 3; i++)
+        {
+            SpawnEnemyType(enemyPrefabs[3]);
+            yield return new WaitForSeconds(spawnDelay);
+        }
+        isTutorial = false;
+        IsWaves = true;
+
     }
 
     public void OnRoundButtonClick()
@@ -197,9 +251,11 @@ public class EnemySpawner : MonoBehaviour
             InstantiateEnemy(enemyPrefabs[randomIndex]);
         }
 
+    }
 
-
-
+    void SpawnEnemyType(GameObject enemy)
+    {
+        InstantiateEnemy(enemy);
     }
 
     void InstantiateEnemy(GameObject enemy)
@@ -208,8 +264,11 @@ public class EnemySpawner : MonoBehaviour
         var enemyScript = createEnemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
-        enemyScript.health += enemyHealthAdd;
-        enemyScript.speed += enemySpeedAdd;
+        if(currWave > 1)
+        {
+            enemyScript.health += enemyHealthAdd * currWave;
+            enemyScript.speed += enemySpeedAdd * currWave;
+        }
         enemyScript.worth = enemyWorth;
     }
 

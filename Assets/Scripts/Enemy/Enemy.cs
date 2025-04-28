@@ -5,37 +5,56 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 10.0f;
-    public PlayerManager manager; 
+    public PlayerManager manager;
     public int health = 100;
     public GameObject[] waypoints;
     int currentWP = 0;
     public int worth = 25;
 
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(this.transform.position,waypoints[currentWP].transform.position)< .1f)
-            currentWP++;
-        
-        Vector3 newPos = Vector3.MoveTowards(this.transform.position, waypoints[currentWP].transform.position, speed * Time.deltaTime);
-        this.transform.position = newPos;
+        if (currentWP >= waypoints.Length) return;
+
+        Vector3 targetPos = waypoints[currentWP].transform.position;
+        Vector3 direction = (targetPos - transform.position).normalized;
+
+        // Set animation parameters
+        animator.SetFloat("moveX", direction.x);
+        animator.SetFloat("moveY", direction.y);
+
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if (direction.x > 0.01f)
+                spriteRenderer.flipX = true;  // walking right
+            else if (direction.x < -0.01f)
+                spriteRenderer.flipX = false; // walking left
+        }
+
+        // Move toward waypoint
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, targetPos) < 0.1f) currentWP++;
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log(health);
+        Debug.Log("Enemy health " + health);
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            CollectMoney(25);
+            Die();
         }
     }
 
@@ -47,11 +66,27 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-        if(other.tag == "Goal" && manager.health != 0){
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Goal" && manager.health != 0)
+        {
             manager.health = --manager.health;
             Debug.Log("goal reached " + manager.health);
             Destroy(this.gameObject);
         }
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Die");
+        speed = 0f;
+        CollectMoney(worth);
+        StartCoroutine(DeathSequence());
+    }
+
+    IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }

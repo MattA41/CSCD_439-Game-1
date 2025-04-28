@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5c94341c187fd488555cf305bab665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  attackCooldown: 1
-  attackRange: 3
+  damage: 5
+  attackCooldown: 0.6
+  attackRange: 5
   firePoint: {fileID: 5743834613177386855}
   bulletPrefab: {fileID: 75827140240955473, guid: 37db3f8d5e4d34906a16a242717a1abe, type: 3}
 --- !u!58 &2912400287819524423
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2.5
 --- !u!1 &5022104734258211658
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 5139232549670443737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2912400287819524421}
@@ -346,8 +346,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8878394720776899267}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 1.28, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -417,7 +417,7 @@ Animator:
   m_GameObject: {fileID: 8878394720776899267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4eaa774f5133a44a697d50bb35eeba8e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 00c774034095e42bbac041eba8346393, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

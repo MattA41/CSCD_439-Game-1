@@ -11,7 +11,9 @@ public class Bullet : MonoBehaviour
     public float speed = 10f;
     public int damage = 10;
     private Transform target;
-
+    public bool isAOE;
+    public float radius;
+    
     public void SetTarget(Transform targetTransform)
     {
         target = targetTransform;
@@ -35,13 +37,19 @@ public class Bullet : MonoBehaviour
 
         // Check distance
         if (Vector2.Distance(transform.position, target.position) < .5f)
-        {
-            // Null check after damage, in case it destroys the enemy
-            if (target != null && target.TryGetComponent<Enemy>(out Enemy enemy))
+        {   
+            if (isAOE)
             {
-                enemy.TakeDamage(damage);
+                aoeAttack();
             }
-
+            else
+            {
+                // Null check after damage, in case it destroys the enemy
+                if (target != null && target.TryGetComponent<Enemy>(out Enemy enemy))
+                {
+                    enemy.TakeDamage(damage);
+                }
+            }
             if (impactPrefab != null)
             {
                 GameObject impact = Instantiate(impactPrefab, transform.position, Quaternion.identity);
@@ -50,6 +58,21 @@ public class Bullet : MonoBehaviour
 
             // Destroy projectile after hitting
             Destroy(gameObject);
+        }
+    }
+    
+
+    public void aoeAttack(){
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(gameObject.transform.position, radius);
+
+        foreach (var hit in hitColliders)
+        {
+            Enemy enemy = hit.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                Debug.Log("hit object AOE "+ hit);
+                enemy.TakeDamage(damage);
+            }
         }
     }
 }

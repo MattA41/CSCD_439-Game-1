@@ -29,7 +29,6 @@ public class TowerPlacementManager : MonoBehaviour
 
 
 
-
     // Update is called once per frame
     void Update()
     {
@@ -93,7 +92,7 @@ public class TowerPlacementManager : MonoBehaviour
 
 
     }
-    private IEnumerator ShowInsufficientFunds()
+    public IEnumerator ShowInsufficientFunds()
     {
         isAnimatingFunds = true;
 
