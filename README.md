@@ -5,6 +5,15 @@
 Pixel Defense is a Tower defense game where you are defending the lands of Pixlandia from the forces of Lord Glitch. How long can you hold out?
 
 ---
+## Know Bugs
+
+- Tower Overlapping:
+Players are currently able to place multiple towers on top of each other. This behavior is unintended — towers should not overlap. Unfortunately, due to project constraints, this issue could not be fixed in the current version.
+
+- Cons Save/ Load Issue:
+When players save their game during a session, the number of coins at that moment is saved correctly. However, loading that save while playing on a different map incorrectly carries over the coins from the previous save. This happens because the save system does not track the map when saving player stats.
+
+---
 
 # Install and Run
 
