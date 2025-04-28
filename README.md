@@ -25,7 +25,7 @@ Pixel Defense is a Tower defense game where you are defending the lands of Pixla
 
 3. Right-click PixelDefence.app -> select Open
 
-4. If you see a security warning, click Done, then got to System Settings -> Privacy & Security -> Scroll down to Security section -> click button "Click Anyway" right of the game name -> Enter your password -> Then game should open automatically. If not, repeat step 3
+4. If you see a security warning, click Done, then got to System Settings -> Privacy & Security -> Scroll down to Security section -> click button "Open Anyway" right of the game name -> Enter your password -> Then game should open automatically. If not, repeat step 3
 
 5. Enjoy!
 
