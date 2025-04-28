@@ -264,8 +264,11 @@ public class EnemySpawner : MonoBehaviour
         var enemyScript = createEnemy.GetComponent<Enemy>();
         enemyScript.waypoints = mapWayPoints;
         enemyScript.manager = pmanager;
-        enemyScript.health += enemyHealthAdd;
-        enemyScript.speed += enemySpeedAdd;
+        if(currWave > 1)
+        {
+            enemyScript.health += enemyHealthAdd * currWave;
+            enemyScript.speed += enemySpeedAdd * currWave;
+        }
         enemyScript.worth = enemyWorth;
     }
 

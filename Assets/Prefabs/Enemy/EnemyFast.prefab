@@ -100,11 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2435fb6fdb9e9394696f482ce091aa05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   manager: {fileID: 0}
   health: 5
   waypoints: []
-  worth: 25
+  worth: 2
   animator: {fileID: 0}
   spriteRenderer: {fileID: 0}
 --- !u!50 &4919836910121099453
