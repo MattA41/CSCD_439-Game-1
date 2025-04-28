@@ -7066,7 +7066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8387253696718610695, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
       propertyPath: m_UiScaleMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8387253696718610695, guid: 6d0c3f400be548640ba74a709c83fef5, type: 3}
       propertyPath: m_PresetInfoIsWorld
